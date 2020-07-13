@@ -3,8 +3,8 @@ const SEARCH_URL     = 'http://api.giphy.com/v1/gifs/search'
 const TRENDING_URL   = 'http://api.giphy.com/v1/gifs/trending'
 const limitTrending  = 4
 
-function search(){
-    let value = document.getElementById('search').value
+function search(value = document.getElementById('search').value){
+
     let found = fetch( SEARCH_URL +'?q=' + value + '&api_key=' + window.atob(API_KEY_Base64))
         .then(response => {
             return response.json()
@@ -73,7 +73,8 @@ function trending(){
                     image.setAttribute('src',data.data[index].images.downsized.url)
 
                     let seeMoreButton = document.createElement('div')
-                    seeMoreButton.setAttribute("class",'seeMore') 
+                    seeMoreButton.setAttribute("class",'seeMore')
+                    seeMoreButton.addEventListener("click",() =>{search(data.data[index].title)})
                     seeMoreButton.setAttribute("id",'seeMore-'+(index+1)) 
                     seeMoreButton.innerText="Ver más..."
 
@@ -117,3 +118,4 @@ function toggleTheme() {
        setTheme('theme-day');
    }
 })();
+
