@@ -1,0 +1,12 @@
+{
+    "liveServer.settings.port": 5501,
+    "compile-hero": {
+        "disable-compile-files-on-did-save-code": false,
+        "javascript-output-directory": "./",
+        "javascript-output-toggle": false,
+        "sass-output-directory": "./",
+        "sass-output-toggle": true,
+        "scss-output-directory": "./",
+        "scss-output-toggle": true,
+      }
+}
