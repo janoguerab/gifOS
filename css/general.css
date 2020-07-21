@@ -1,14 +1,16 @@
 @import url(day.css);
 @import url(night.css);
 @import url("https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;700&display=swap");
-#list-result .result, #list-result .image {
+#list-result .result, #search-result .result, #list-result .image, #search-result .image {
   width: 288px;
   height: 298px;
+  margin: 5px;
 }
 
-#list-result .resultLarge, #list-result .imageLarge {
+#list-result .resultLarge, #search-result .resultLarge, #list-result .imageLarge, #search-result .imageLarge {
   width: 576px;
   height: 298px;
+  margin: 5px;
 }
 
 html, body {
@@ -26,7 +28,7 @@ main, .content {
   align-content: center;
 }
 
-#list-result {
+#list-result, #search-result {
   display: flex;
   flex-flow: row wrap;
   list-style: none;
@@ -148,7 +150,7 @@ main, .content {
 }
 
 .buscarContent {
-  max-width: 1200px;
+  width: 1200px;
   height: 99px;
   display: flex;
   flex-flow: row wrap;
@@ -168,7 +170,7 @@ main, .content {
 }
 
 .buscarContent .search {
-  max-width: 1057px;
+  width: 1057px;
   height: 48px;
   display: flex;
   flex-flow: row wrap;

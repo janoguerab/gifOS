@@ -4,10 +4,12 @@
 %normalImage{
     width: 288px;
     height: 298px;
+    margin: 5px;
 }
 %largeImage{
     width: 576px;
     height: 298px;
+    margin: 5px;
 }
 
 html, body {
@@ -25,7 +27,7 @@ html, body {
     align-content: center;
   }
 
-#list-result{
+#list-result, #search-result{
     display: flex;
     flex-flow: row wrap;
     list-style: none;
@@ -152,7 +154,7 @@ html, body {
     align-content: center;
 }
 .buscarContent{
-    max-width: 1200px;
+    width: 1200px;
     height: 99px;
     display: flex;
     flex-flow: row wrap;
@@ -171,7 +173,7 @@ html, body {
     }
     
     .search{
-        max-width: 1057px;
+        width: 1057px;
         height: 48px;
         display: flex;
         flex-flow: row wrap;

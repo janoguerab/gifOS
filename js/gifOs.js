@@ -1,17 +1,19 @@
 const API_KEY_Base64 = 'OVg0d1NYSTVETDA4UUhRcUNJMGI4MWhMSjI0NXVUbFg=' //Encoded Key
 const SEARCH_URL     = 'http://api.giphy.com/v1/gifs/search'
 const TRENDING_URL   = 'http://api.giphy.com/v1/gifs/trending'
-const limitTrending  = 4
+const RANDOM_URL     = 'http://api.giphy.com/v1/gifs/random'
+const limitTrending  = 10
+const limitSearch    = 15
 
 function search(value = document.getElementById('search').value){
-
+ console.log(value)
     let found = fetch( SEARCH_URL +'?q=' + value + '&api_key=' + window.atob(API_KEY_Base64))
         .then(response => {
             return response.json()
         })
         .then(data => { // Get Searched images, puts into results
             if(data.data.length > 0){
-                var list = document.getElementById('list-result')
+                var list = document.getElementById('search-result')
                 list.innerHTML='' //Remove before results
                 for (let index = 0; index < data.data.length; index++) {
                    
@@ -40,6 +42,71 @@ function search(value = document.getElementById('search').value){
     return found
 }
 
+function suggest(){
+    
+    var list = document.getElementById('suggest')
+    list.innerHTML='' //Remove before results
+      
+    var index = 1;
+    var title;
+   for (let index = 1; index < 5; index++) {
+        createSuggest(index,list)
+       
+   }
+
+    
+}
+function createSuggest(index,list){
+
+        let found = fetch( RANDOM_URL + '?api_key=' + window.atob(API_KEY_Base64))
+        .then(response => {
+            return response.json()
+        })
+        .then(data => { // Get Searched images, puts into results.
+            if(data.data.title.length>1){
+                let result = document.createElement('div')
+                result.setAttribute("class",'suggestResutl')  
+                let resultBar = document.createElement('div')
+                resultBar.setAttribute("class",'upBar bar') 
+
+                let resultTitle = document.createElement('span')
+                resultTitle.setAttribute("class",'title')   
+                console.log("TITLE SIZE: "+data.data.title.length)
+                resultTitle.innerText = '#'+data.data.title.replace(/\s/g,'').split('GIF')[0]
+                
+                let closeButton = document.createElement('div')
+                closeButton.setAttribute("class",'close') 
+                closeButton.setAttribute("id",'close-'+index) 
+
+                resultBar.appendChild(resultTitle)
+                resultBar.appendChild(closeButton)
+
+                let image = document.createElement('img')
+                image.setAttribute('class','suggestImage') //Evalues if puts a image Large or normal            
+                image.setAttribute('src',data.data.images.downsized.url)
+
+                let seeMoreButton = document.createElement('div')
+                seeMoreButton.setAttribute("class",'seeMore')
+                seeMoreButton.addEventListener("click",() =>{search(data.data.title.split('GIF')[0])})
+                seeMoreButton.setAttribute("id",'seeMore-'+index) 
+                seeMoreButton.innerText="Ver más..."
+
+                result.appendChild(resultBar)
+                result.appendChild(image)
+                result.appendChild(seeMoreButton)
+    
+                list.appendChild(result)
+                index++;
+            }else
+            {
+                createSuggest(index,list)
+            }
+            return data
+        })
+        .catch(error => {
+            return error
+        })
+}
 function trending(){
     let found = fetch( TRENDING_URL +'?limit=' + limitTrending + '&api_key=' + window.atob(API_KEY_Base64))
         .then(response => {
@@ -47,42 +114,26 @@ function trending(){
         })
         .then(data => { // Get Searched images, puts into results
             if(data.data.length > 0){
-                var list = document.getElementById('suggest')
+                var list = document.getElementById('list-result')
                 list.innerHTML='' //Remove before results
                 for (let index = 0; index < data.data.length; index++) {
                    
-                    let result = document.createElement('div')
-                    result.setAttribute("class",'suggestResutl')  
-
-                    let resultBar = document.createElement('div')
-                    resultBar.setAttribute("class",'upBar bar') 
-
-                    let resultTitle = document.createElement('span')
-                    resultTitle.setAttribute("class",'title')   
-                    resultTitle.innerText = '#'+data.data[index].title.replace(/\s/g,'').split('GIF')[0]
-                    
-                    let closeButton = document.createElement('div')
-                    closeButton.setAttribute("class",'close') 
-                    closeButton.setAttribute("id",'close-'+(index+1)) 
-
-                    resultBar.appendChild(resultTitle)
-                    resultBar.appendChild(closeButton)
+                    let result = document.createElement('li')
+                    result.setAttribute("class",(index+1) % 5 == 0 ? 'resultLarge':'result')  //Evalues if puts a size Large or normal         
 
                     let image = document.createElement('img')
-                    image.setAttribute('class','suggestImage') //Evalues if puts a image Large or normal            
+                    image.setAttribute('class',(index+1) % 5 == 0 ? 'imageLarge':'image') //Evalues if puts a image Large or normal            
                     image.setAttribute('src',data.data[index].images.downsized.url)
 
-                    let seeMoreButton = document.createElement('div')
-                    seeMoreButton.setAttribute("class",'seeMore')
-                    seeMoreButton.addEventListener("click",() =>{search(data.data[index].title)})
-                    seeMoreButton.setAttribute("id",'seeMore-'+(index+1)) 
-                    seeMoreButton.innerText="Ver más..."
+                    let imageInfo = document.createElement('span')
+                    imageInfo.setAttribute('class','bar')
+                    imageInfo.innerHTML=''
 
-                    result.appendChild(resultBar)
                     result.appendChild(image)
-                    result.appendChild(seeMoreButton)
-     
+                    result.appendChild(imageInfo)
                     list.appendChild(result)
+
+                    
                 }
             }
             
@@ -95,6 +146,7 @@ function trending(){
 }
 
 window.onload = () =>{
+    suggest()
     trending()
 }
 
