@@ -24,7 +24,7 @@ html, body {
 main, .content {
   display: flex;
   flex-flow: column wrap;
-  justify-content: start;
+  justify-content: center;
   align-content: center;
 }
 
@@ -135,6 +135,7 @@ main, .content {
 
 .subtitle {
   max-width: 1200px;
+  min-width: 80vw;
   height: 32px;
   border: 1px solid;
   background-color: #FFFAFE;
@@ -179,6 +180,7 @@ main, .content {
 }
 
 .seeMore {
+  cursor: pointer;
   width: 81px;
   height: 34px;
   display: flex;

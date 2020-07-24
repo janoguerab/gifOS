@@ -3,10 +3,9 @@ const SEARCH_URL     = 'http://api.giphy.com/v1/gifs/search'
 const TRENDING_URL   = 'http://api.giphy.com/v1/gifs/trending'
 const RANDOM_URL     = 'http://api.giphy.com/v1/gifs/random'
 const limitTrending  = 10
-const limitSearch    = 15
+const limitSearch    = 10
 
 function search(value = document.getElementById('search').value){
- console.log(value)
     let found = fetch( SEARCH_URL +'?q=' + value + '&api_key=' + window.atob(API_KEY_Base64))
         .then(response => {
             return response.json()
@@ -71,7 +70,6 @@ function createSuggest(index,list){
 
                 let resultTitle = document.createElement('span')
                 resultTitle.setAttribute("class",'title')   
-                console.log("TITLE SIZE: "+data.data.title.length)
                 resultTitle.innerText = '#'+data.data.title.replace(/\s/g,'').split('GIF')[0]
                 
                 let closeButton = document.createElement('div')
@@ -87,7 +85,10 @@ function createSuggest(index,list){
 
                 let seeMoreButton = document.createElement('div')
                 seeMoreButton.setAttribute("class",'seeMore')
-                seeMoreButton.addEventListener("click",() =>{search(data.data.title.split('GIF')[0])})
+                seeMoreButton.addEventListener("click",() =>{
+                    search(data.data.title.split('GIF')[0])
+                    document.getElementById('searchResult').scrollIntoView();  // Desplaze to result
+                    })
                 seeMoreButton.setAttribute("id",'seeMore-'+index) 
                 seeMoreButton.innerText="Ver más..."
 
@@ -106,6 +107,7 @@ function createSuggest(index,list){
         .catch(error => {
             return error
         })
+        
 }
 function trending(){
     let found = fetch( TRENDING_URL +'?limit=' + limitTrending + '&api_key=' + window.atob(API_KEY_Base64))
@@ -152,7 +154,6 @@ window.onload = () =>{
 
 // function to set a given theme/color-scheme
 function setTheme(themeName) {
-    console.log(themeName)
     localStorage.setItem('theme', themeName);
     document.documentElement.className = themeName;
 }// function to toggle between day and night theme
