@@ -19,17 +19,40 @@
     <div class="content">
         <div class="createGif">
             <div class="bar">Crear Guifos</div>
-            <div class="icon"><img src="assets/window img.png" alt="icono de ventana"></div>
-            <div class="instructions">
-                <p><strong>Aquí podrás crear tus propios guifos</strong></p>
-                <p>Crear tu <strong>guifo</strong> es muy fácil, graba cualquier imagen con tu cámara y obtén guifos presonalizados. Los pasos para crear tu guifo son:</p>
-                <p><strong>1)</strong> Dar permisos de acceso a la cámara (sólo por el tiempo de uso)</p>
-                <p><strong>2)</strong> Capturar tu momento guifo</p>
-                <p><strong>3)</strong> Revisar el momento</p>
-                <p><strong>4)</strong> Listo para subir y compartir!</p>
-                <p>¿Quieres comensar a crear tu <strong>guifo</strong> ahora?</p>
+            <div class="message">
+                <div class="icon"><img src="assets/window img.png" alt="icono de ventana"></div>
+                <div class="instructions">
+                    <p class="title"><strong>Aquí podrás crear tus propios guifos</strong></p>
+                    <div class="instructionsContent">
+                        <p>Crear tu <strong>guifo</strong> es muy fácil, graba cualquier imagen con tu cámara y obtén guifos presonalizados. Los pasos para crear tu guifo son:</p>
+                        <p><strong>1)</strong> Dar permisos de acceso a la cámara (sólo por el tiempo de uso)</p>
+                        <p><strong>2)</strong> Capturar tu momento guifo</p>
+                        <p><strong>3)</strong> Revisar el momento</p>
+                        <p><strong>4)</strong> Listo para subir y compartir!</p>
+                        <p>¿Quieres comensar a crear tu <strong>guifo</strong> ahora?</p>
+                    </div>
+                    
+                </div>
             </div>
-            <div class="buscar" onclick="search()"><img src="assets/lupa_inactive.svg" alt="lupa para buscas" class="buscarImg"> Buscar</div>
+            <div class="buttons">
+                <div class="mainButton cancel" onclick="Cancel()">Cancelar</div>
+                <div class="mainButton beggin" onclick="Beggin()">Comenzar</div>
+            </div>
+            </div>
+            
+        </div>
+        <div class="camera">
+            <div class="bar">
+                <div class="bartitle">Un Chequeo antes de Comenzar</div> 
+                <div class="close"></div>
+            </div>
+            <div class="cam">
+                <video src=""></video>
+            </div>
+            <div class="buttons">
+                <div class="mainButton cameraIcon" onclick="themer()" value="Capturar"><img src="/assets/camera.svg" alt="Capturar"></div>
+                <div class="mainButton capture" onclick="record()" value="Capturar">Capturar</div>  
+            </div>
         </div>
         <div class="ownGifs" id="ownGifs">
             <p class="subtitle">Mis guifos</p>
