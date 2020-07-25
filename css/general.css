@@ -231,6 +231,7 @@ main, .content {
 }
 
 .camera {
+  display: none;
   margin: auto;
   width: 860px;
   height: 548px;

@@ -149,6 +149,9 @@ function trending(){
 }
 
 function getCamera(){
+    document.getElementById('createGif').style.display="none";
+    document.getElementById('camera').style.display="flex";
+
     navigator.mediaDevices.getUserMedia(constraints)
         .then(function(mediaStream) {
             var video = document.querySelector('video');
@@ -161,7 +164,11 @@ function getCamera(){
 }
 
 function record(){
-    document.getElementById("buttons").classList.toggle("ready");
+    var buttons = document.getElementsByClassName("mainButton");
+    for (let index = 0; index < buttons.length; index++) {
+        const element = buttons[index];
+        element.classList.toggle("ready");
+    }
     document.getElementById("cameraIcon").src="../assets/recording.svg";
     document.getElementById("capture").innerHTML="Listo"
 }
