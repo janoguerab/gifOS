@@ -4,6 +4,7 @@ const TRENDING_URL   = 'http://api.giphy.com/v1/gifs/trending'
 const RANDOM_URL     = 'http://api.giphy.com/v1/gifs/random'
 const limitTrending  = 10
 const limitSearch    = 10
+const constraints    = { audio: false, video: { width: 1280, height: 720 } }; 
 
 function search(value = document.getElementById('search').value){
     let found = fetch( SEARCH_URL +'?q=' + value + '&api_key=' + window.atob(API_KEY_Base64))
@@ -147,9 +148,32 @@ function trending(){
     return found
 }
 
+function getCamera(){
+    navigator.mediaDevices.getUserMedia(constraints)
+        .then(function(mediaStream) {
+            var video = document.querySelector('video');
+            video.srcObject = mediaStream;
+            video.onloadedmetadata = function(e) {
+                video.play(); // Starting reproduce video cam
+            };
+        })
+        .catch(function(err) { console.log(err.name + ": " + err.message); }); // always check for errors at the end.
+}
+
+function record(){
+    document.getElementById("buttons").classList.toggle("ready");
+    document.getElementById("cameraIcon").src="../assets/recording.svg";
+    document.getElementById("capture").innerHTML="Listo"
+}
+
+// starting when all render page is done!
 window.onload = () =>{
-    suggest()
-    trending()
+    if(document.getElementById('suggest')){
+        suggest()
+    }
+    if(document.getElementById('list-result')){
+        trending()
+    }
 }
 
 // function to set a given theme/color-scheme

@@ -1,6 +1,11 @@
 .theme-night{
     $right : #EE3EFE;
     $left : #2E32FB;
+
+    .box{
+        background: #B4B4B4;
+        box-shadow: inset -2px -2px 0 0 #8F8F8F, inset 2px 2px 0 0 #FFFFFF;
+    }
     body{
         background-color: darkblue;
     }
