@@ -254,8 +254,19 @@ html, body {
 
     .cam{
         margin: 1% 2%;
-        width: 832px;
-        height: 434px;
+        width: 838px;
+        height: 440px;
+        img{
+            display: none;
+        }
+        video, img {
+            border: solid ;
+            width: auto;
+            height: 440px;
+            background: #FFFFFF;
+            border: 1px solid #979797;
+            box-shadow: inset -2px -2px 0 0 #E6E6E6, inset 2px 2px 0 0 #000000;
+        }
         
     }
     .buttons{
@@ -271,5 +282,7 @@ html, body {
             height: 36px;
         }
     }
-    
+    .gir{
+        display: none;
+    }
 }

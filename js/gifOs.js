@@ -5,7 +5,7 @@ const RANDOM_URL     = 'http://api.giphy.com/v1/gifs/random'
 const SEARCH_TAG     = 'http://api.giphy.com/v1/tags/related/'
 const limitTrending  = 16
 const limitSearch    = 16
-const constraints    = { audio: false, video: { width: 1280, height: 720 } }; 
+const constraints    = { audio: false, video: { width: 838, height: 440 } }; 
 
 function search(value = document.getElementById('search').value){
     getTags(value);
@@ -147,21 +147,33 @@ function trending(){
         })
     return found
 }
-
+let stream;
+let recorder;
+ 
 function getCamera(){
     document.getElementById('createGif').style.display="none";
     document.getElementById('camera').style.display="flex";
-
-    navigator.mediaDevices.getUserMedia(constraints)
+    var video = document.querySelector('video');
+    stream = navigator.mediaDevices.getUserMedia(constraints)
         .then(function(mediaStream) {
-            var video = document.querySelector('video');
             video.srcObject = mediaStream;
             video.onloadedmetadata = function(e) {
                 video.play(); // Starting reproduce video cam
             };
+            recorder = RecordRTC(mediaStream, { 
+                // disable logs
+                disableLogs: true,
+                type: "gif",
+                frameRate: 1,
+                width: 360,
+                hidden: 240,
+                quality: 10});
         })
         .catch(function(err) { console.log(err.name + ": " + err.message); }); // always check for errors at the end.
+
+        
 }
+
 let seconds = 0;
 function setTime(){
     var d = new Date(1000*seconds++);
@@ -170,6 +182,7 @@ function setTime(){
     document.getElementById('timer').innerHTML = t;
     
 }
+
 let interval;
 
 // Stop Interval
@@ -187,14 +200,28 @@ function stopInterval(){
     subir.setAttribute("onclick","upload()");
     subir.setAttribute("id","subir");
     subir.innerHTML="Subir Guifo";
+    let recorded= document.getElementById("recorded");
     recorded.appendChild(repetir);
     recorded.appendChild(subir);
 
     clearInterval(interval);
     seconds=0;
+    recorder.stopRecording(function() {
+        var blob = this.getBlob();
+        document.getElementById("videocamera").style.display="none";
+        var gif = document.getElementById("gif");
+        gif.style.display="flex";
+        gif.src = URL.createObjectURL(blob);
+    });
 }
 //Repeat Gifo
 function repeat(){
+    recorder.destroy();
+    getCamera();
+    document.getElementById("videocamera").style.display="flex";
+    var gif = document.getElementById("gif");
+    gif.style.display="none";
+    gif.src="";
     interval = setInterval(setTime, 1000 );
     document.getElementById("cam").style.display="flex";
     document.getElementById("capture").style.display="flex";
@@ -220,6 +247,9 @@ function record(){
         document.getElementById("cam").setAttribute("onclick","stopInterval()");
         document.getElementById("capture").setAttribute("onclick","stopInterval()")
         interval = setInterval(setTime, 1000 );
+        
+
+        recorder.startRecording();
     }else{
         document.getElementById("cameraIcon").src="../assets/camera.svg"
         document.getElementById("capture").innerHTML="Capturar"
