@@ -3,6 +3,7 @@ const SEARCH_URL     = 'http://api.giphy.com/v1/gifs/search'
 const TRENDING_URL   = 'http://api.giphy.com/v1/gifs/trending'
 const RANDOM_URL     = 'http://api.giphy.com/v1/gifs/random'
 const SEARCH_TAG     = 'http://api.giphy.com/v1/tags/related/'
+const UPLOAD_URL     = 'http://upload.giphy.com/v1/gifs'
 const limitTrending  = 16
 const limitSearch    = 16
 const constraints    = { audio: false, video: { width: 838, height: 440 } }; 
@@ -222,7 +223,7 @@ function repeat(){
     var gif = document.getElementById("gif");
     gif.style.display="none";
     gif.src="";
-    interval = setInterval(setTime, 1000 );
+    
     document.getElementById("cam").style.display="flex";
     document.getElementById("capture").style.display="flex";
     recorded = document.getElementById("recorded");
@@ -235,9 +236,32 @@ function repeat(){
     record();
     
 }
-
+//Upload gif
 function upload(){
-
+    let form = new FormData();
+    form.append('file', recorder.getBlob(), 'myGif.gif');
+    let params = {
+        method: "POST",
+        body: form,
+        json: true
+    };
+    let data = fetch(UPLOAD_URL+'?api_key=' + window.atob(API_KEY_Base64), params)
+        .then(response => {
+            return response.json()
+            .then(data =>{
+                let ids = JSON.parse(localStorage.getItem('IDs'));
+                if(ids){
+                    localStorage.setItem('IDs', ids.appendChild(data.data.id))
+                }else{
+                    localStorage.setItem('IDs',  JSON.parse(data.data.id).stringify());
+                }
+            });
+        })
+        .catch(error => {
+            return console.log(error)
+        });
+    repeat();
+    
 }
 
 function record(){  
