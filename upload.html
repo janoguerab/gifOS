@@ -49,10 +49,12 @@
             <div class="cam box"> 
                 <video src="" allow="microphone"></video>
             </div>
-            <div class="buttons" id="buttons" onclick="record()">
-                <div class ="timer box" id="timer">00:00:00</div>
-                <div class="mainButton cameraIcon" id="camera"><img id="cameraIcon" src="/assets/camera.svg" alt="Capturar"></div>
-                <div class="mainButton capture" id="capture">Capturar</div>  
+            <div class="buttons" id="buttons">
+                <div class="mainButton cameraIcon" id="cam" onclick="record()"><img id="cameraIcon" src="/assets/camera.svg" alt="Capturar"></div>
+                <div class="mainButton capture" id="capture" onclick="record()">Capturar</div>  
+                <div class="recorded" id="recorded">
+                    <div class ="timer box" id="timer">00:00:00</div>
+                </div>
             </div>
         </div>
         <div class="ownGifs" id="ownGifs">

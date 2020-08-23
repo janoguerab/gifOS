@@ -174,8 +174,7 @@ let interval;
 
 // Stop Interval
 function stopInterval(){
-    buttons = document.getElementById("buttons");
-    document.getElementById("camera").style.display = "none";
+    document.getElementById("cam").style.display = "none";
     document.getElementById("capture").style.display = "none";
 
     let repetir = document.createElement("div");
@@ -188,18 +187,26 @@ function stopInterval(){
     subir.setAttribute("onclick","upload()");
     subir.setAttribute("id","subir");
     subir.innerHTML="Subir Guifo";
-    buttons.appendChild(repetir);
-    buttons.appendChild(subir);
+    recorded.appendChild(repetir);
+    recorded.appendChild(subir);
 
     clearInterval(interval);
+    seconds=0;
 }
 //Repeat Gifo
 function repeat(){
     interval = setInterval(setTime, 1000 );
-    document.getElementById("camera").style.display="flex";
+    document.getElementById("cam").style.display="flex";
     document.getElementById("capture").style.display="flex";
-    document.getElementById("repetir").style.display="none";
-    document.getElementById("capture").style.display="none";
+    recorded = document.getElementById("recorded");
+    recorded.innerHTML="";
+    let timer = document.createElement("div");
+    timer.setAttribute("class","timer box");
+    timer.setAttribute("id","timer");
+    timer.innerHTML="00:00:00"
+    recorded.appendChild(timer);
+    record();
+    
 }
 
 function upload(){
@@ -210,12 +217,16 @@ function record(){
     if (document.getElementById("capture").innerHTML != "Listo"){
         document.getElementById("cameraIcon").src="../assets/recording.svg"
         document.getElementById("capture").innerHTML="Listo"
-        document.getElementById("buttons").setAttribute("onclick","stopInterval()");
+        document.getElementById("cam").setAttribute("onclick","stopInterval()");
+        document.getElementById("capture").setAttribute("onclick","stopInterval()")
         interval = setInterval(setTime, 1000 );
     }else{
         document.getElementById("cameraIcon").src="../assets/camera.svg"
         document.getElementById("capture").innerHTML="Capturar"
-        document.getElementById("buttons").onclick="record()"
+        document.getElementById("cam").setAttribute("onclick","record()");
+        document.getElementById("capture").setAttribute("onclick","record()");
+        clearInterval(interval);
+        seconds=0;
     }
     
 }
