@@ -250,10 +250,13 @@ function upload(){
             return response.json()
             .then(data =>{
                 let ids = JSON.parse(localStorage.getItem('IDs'));
+                console.log(ids)
                 if(ids){
-                    localStorage.setItem('IDs', ids.appendChild(data.data.id))
+                    ids.push(data.data.id);
+                    localStorage.setItem('IDs', JSON.stringify(ids));
                 }else{
-                    localStorage.setItem('IDs',  JSON.parse(data.data.id).stringify());
+                    let newIds=[data.data.id];
+                    localStorage.setItem('IDs',  JSON.stringify(newIds));
                 }
             });
         })
