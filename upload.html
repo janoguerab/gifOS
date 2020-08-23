@@ -46,18 +46,22 @@
                 <div class="bartitle">Un Chequeo antes de Comenzar</div> 
                 <div class="close"></div>
             </div>
-            <div class="cam box">
+            <div class="cam box"> 
                 <video src="" allow="microphone"></video>
             </div>
-            <div class="buttons" id="buttons" onclick="record()" value="Capturar">
-                <div class="mainButton cameraIcon"><img id="cameraIcon" src="/assets/camera.svg" alt="Capturar"></div>
+            <div class="buttons" id="buttons" onclick="record()">
+                <div class ="timer box" id="timer">00:00:00</div>
+                <div class="mainButton cameraIcon" id="camera"><img id="cameraIcon" src="/assets/camera.svg" alt="Capturar"></div>
                 <div class="mainButton capture" id="capture">Capturar</div>  
             </div>
         </div>
         <div class="ownGifs" id="ownGifs">
-            <p class="subtitle">Mis guifos</p>
-            <ul id="myGifs"></ul>
-            
+            <div class="subtitle">Mis guifos</div>
+            <div id="myGifs"></div>
+        </div>
+        <div class="savedGifs">
+            <div class="subtitle">Guifos guardados: </div>
+            <div id="saved"></div>
         </div>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/RecordRTC/5.5.8/RecordRTC.js" type="text/javascript"></script>

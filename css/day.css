@@ -1,12 +1,7 @@
 .theme-day body {
-  background-color: #F7C9F3;
+  background-color: #FFF4FD;
 }
 
-.theme-day .box{
-  margin: auto;
-  background: #E6E6E6;
-  box-shadow: inset -2px -2px 0 0 #B4B4B4, inset 2px 2px 0 0 #FFFFFF;
-}
 .theme-day .bar {
   background: linear-gradient(to right, #4180F6, #F7C9F3);
   color: white;
@@ -28,8 +23,7 @@
   box-shadow: inset -2px -2px 0 0 #284F99, inset 2px 2px 0 0 #FFFFFF;
 }
 
-.theme-day .ready{
-  background: #FF6161;
-  border: 1px solid #110038;
-  box-shadow: inset -1px -1px 0 0 #993A3A, inset 1px 1px 0 0 #FFFFFF;
+.theme-day .theme-list {
+  background: #E6E6E6;
+  box-shadow: inset -2px -2px 0 0 #B4B4B4, inset 2px 2px 0 0 #FFFFFF;
 }

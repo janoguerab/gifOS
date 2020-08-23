@@ -2,11 +2,13 @@ const API_KEY_Base64 = 'OVg0d1NYSTVETDA4UUhRcUNJMGI4MWhMSjI0NXVUbFg=' //Encoded 
 const SEARCH_URL     = 'http://api.giphy.com/v1/gifs/search'
 const TRENDING_URL   = 'http://api.giphy.com/v1/gifs/trending'
 const RANDOM_URL     = 'http://api.giphy.com/v1/gifs/random'
-const limitTrending  = 10
-const limitSearch    = 10
+const SEARCH_TAG     = 'http://api.giphy.com/v1/tags/related/'
+const limitTrending  = 16
+const limitSearch    = 16
 const constraints    = { audio: false, video: { width: 1280, height: 720 } }; 
 
 function search(value = document.getElementById('search').value){
+    getTags(value);
     let found = fetch( SEARCH_URL +'?q=' + value + '&api_key=' + window.atob(API_KEY_Base64))
         .then(response => {
             return response.json()
@@ -135,8 +137,6 @@ function trending(){
                     result.appendChild(image)
                     result.appendChild(imageInfo)
                     list.appendChild(result)
-
-                    
                 }
             }
             
@@ -162,15 +162,104 @@ function getCamera(){
         })
         .catch(function(err) { console.log(err.name + ": " + err.message); }); // always check for errors at the end.
 }
+let seconds = 0;
+function setTime(){
+    var d = new Date(1000*seconds++);
+    d.setHours(0);
+    var t = "0"+d.toLocaleTimeString();
+    document.getElementById('timer').innerHTML = t;
+    
+}
+let interval;
 
-function record(){
-    var buttons = document.getElementsByClassName("mainButton");
-    for (let index = 0; index < buttons.length; index++) {
-        const element = buttons[index];
-        element.classList.toggle("ready");
+// Stop Interval
+function stopInterval(){
+    buttons = document.getElementById("buttons");
+    document.getElementById("camera").style.display = "none";
+    document.getElementById("capture").style.display = "none";
+
+    let repetir = document.createElement("div");
+    repetir.setAttribute("class","mainButton");
+    repetir.setAttribute("id","repetir");
+    repetir.setAttribute("onclick","repeat()");
+    repetir.innerHTML="Repetir Captura";
+    let subir   = document.createElement("div");
+    subir.setAttribute("class","mainButton");
+    subir.setAttribute("onclick","upload()");
+    subir.setAttribute("id","subir");
+    subir.innerHTML="Subir Guifo";
+    buttons.appendChild(repetir);
+    buttons.appendChild(subir);
+
+    clearInterval(interval);
+}
+//Repeat Gifo
+function repeat(){
+    interval = setInterval(setTime, 1000 );
+    document.getElementById("camera").style.display="flex";
+    document.getElementById("capture").style.display="flex";
+    document.getElementById("repetir").style.display="none";
+    document.getElementById("capture").style.display="none";
+}
+
+function upload(){
+
+}
+
+function record(){  
+    if (document.getElementById("capture").innerHTML != "Listo"){
+        document.getElementById("cameraIcon").src="../assets/recording.svg"
+        document.getElementById("capture").innerHTML="Listo"
+        document.getElementById("buttons").setAttribute("onclick","stopInterval()");
+        interval = setInterval(setTime, 1000 );
+    }else{
+        document.getElementById("cameraIcon").src="../assets/camera.svg"
+        document.getElementById("capture").innerHTML="Capturar"
+        document.getElementById("buttons").onclick="record()"
     }
-    document.getElementById("cameraIcon").src="../assets/recording.svg";
-    document.getElementById("capture").innerHTML="Listo"
+    
+}
+
+// Autocomplete
+function autocomplete(){
+    var delayTimer;
+    clearTimeout(delayTimer);
+    delayTimer = setTimeout(function() {
+    }, 1000); // Will do the ajax stuff after 1000 ms, or 1 s   
+}
+
+//search suggestions
+function getTags(value){
+        let found = fetch( SEARCH_TAG + value + '?api_key=' + window.atob(API_KEY_Base64))
+        .then(response => {
+            return response.json()
+        })
+        .then(data => { // Get Searched images, puts into results
+            if(data.data.length > 0){
+                var list = document.getElementById('tags')
+                list.innerHTML='' //Remove before results
+                
+                for (let index = 0; index < data.data.length; index++) {
+                   
+                    let seeMoreButton = document.createElement('div')
+                    seeMoreButton.setAttribute("class",'tag')
+                    seeMoreButton.addEventListener("click",() =>{
+                        search(data.data.name)
+                        document.getElementById('searchResult').scrollIntoView();  // Desplaze to result
+                        })
+                    seeMoreButton.setAttribute("id",'tag-'+index) 
+                    seeMoreButton.innerText=data.data.name
+                    list.appendChild(seeMoreButton)
+                }
+                
+            }
+            
+            return data
+        })
+        .catch(error => {
+            return error
+        })
+    return found;
 }
 
 // starting when all render page is done!
