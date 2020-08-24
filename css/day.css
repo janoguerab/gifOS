@@ -1,29 +1,28 @@
 .theme-day body {
-  background-color: #FFF4FD;
+  background-color: #F7C9F3;
 }
-
 .theme-day .bar {
   background: linear-gradient(to right, #4180F6, #F7C9F3);
   color: white;
 }
-
 .theme-day .mainButton {
   background-color: #F7C9F3;
   border: 1px solid #110038;
   box-shadow: inset -1px -1px 0 0 #997D97, inset 1px 1px 0 0 #FFFFFF;
 }
-
 .theme-day .buscarContent {
   background-color: #E6E6E6;
 }
-
 .theme-day .seeMore {
   background: #4180F6;
   border: 1px solid #4C2F99;
   box-shadow: inset -2px -2px 0 0 #284F99, inset 2px 2px 0 0 #FFFFFF;
 }
-
 .theme-day .theme-list {
+  background: #E6E6E6;
+  box-shadow: inset -2px -2px 0 0 #B4B4B4, inset 2px 2px 0 0 #FFFFFF;
+}
+.theme-day .content .box {
   background: #E6E6E6;
   box-shadow: inset -2px -2px 0 0 #B4B4B4, inset 2px 2px 0 0 #FFFFFF;
 }

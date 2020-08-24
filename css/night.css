@@ -3,40 +3,37 @@
   background: #B4B4B4;
   box-shadow: inset -2px -2px 0 0 #8F8F8F, inset 2px 2px 0 0 #FFFFFF;
 }
-
 .theme-night body {
   background-color: darkblue;
 }
-
 .theme-night .bar {
   background-image: linear-gradient(to right, #2E32FB, #EE3EFE);
   color: white;
 }
-
 .theme-night .mainButton {
   background-color: #EE3EFE;
   color: white;
   border: 1px solid #110038;
   box-shadow: inset -1px -1px 0 0 #A72CB3, inset 1px 1px 0 0 #FFFFFF;
 }
-
 .theme-night .buscarContent {
   background-color: #B4B4B4;
 }
-
 .theme-night .seeMore {
   background: #2E32FB;
   border: 1px solid #4C2F99;
   box-shadow: inset -2px -2px 0 0 #2124B3, inset 2px 2px 0 0 #FFFFFF;
 }
-
 .theme-night .themer-list {
   background: #B4B4B4;
   box-shadow: inset -2px -2px 0 0 #8F8F8F, inset 2px 2px 0 0 #FFFFFF;
 }
-
 .theme-night .themer-list .theme {
   background: #CCCCCC;
   border: 1px solid #808080;
   box-shadow: inset -1px -1px 0 0 #B4B4B4, inset 1px 1px 0 0 #FFFFFF;
+}
+.theme-night .content .box {
+  background: #B4B4B4;
+  box-shadow: inset -2px -2px 0 0 #8F8F8F, inset 2px 2px 0 0 #FFFFFF;
 }

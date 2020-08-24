@@ -68,8 +68,7 @@ html, body {
         width: 16px;
         height: 16px;
     }
-    .suggestImage
-    {
+    .suggestImage{
         width: 280px;
         height: 280px;
         margin: 2px;
@@ -78,7 +77,6 @@ html, body {
 }
 .bar{
     height: 24px;
-    width: 100%;
     box-shadow: 0 1px 0 0 #110038;
 }
 
@@ -167,7 +165,6 @@ html, body {
     display: flex;
     flex-flow: row wrap;
     justify-content: space-evenly;
-    box-shadow: inset -2px -2px 0 0 #B4B4B4, inset 2px 2px 0 0 #FFFFFF;
 
     .buscar{
         border: 2px outset;
@@ -210,11 +207,6 @@ html, body {
         width: 150px;
         height: 36px;
     }
-}
-
-.createGif{
-    width: 684px;
-    height: 386px;
 }
 
 .buttons{
@@ -321,16 +313,37 @@ html, body {
     .gir{
         display: none;
     }
+}
 
+.content{
+    
+    .createGif{
+        display: block;
+        width: 684px;
+        height: 386px;
+        margin: auto;
+        .message{
+            .icon{
+                margin-top: 5%;
+            }
+            .instructions{
+                margin-top: 3%;
+            }
+        }
+        .buttons{
+            position: relative;
+            margin: 20px;
+            top: 5%;
+        }
+    }
     .ownGifs{
         display: inline-block;
         margin: auto;
         .myGifs{
-            display: flex;
-            flex-flow: row wrap;
-            justify-content: start;
+            display: block;
+            margin: auto 10%;
             .myGif{
-                margin: 10px;
+               margin: 10px;
             }
         }
     }

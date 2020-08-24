@@ -63,7 +63,6 @@ main, .content {
 
 .bar {
   height: 24px;
-  width: 100%;
   box-shadow: 0 1px 0 0 #110038;
 }
 
@@ -148,7 +147,6 @@ main, .content {
   display: flex;
   flex-flow: row wrap;
   justify-content: space-evenly;
-  box-shadow: inset -2px -2px 0 0 #B4B4B4, inset 2px 2px 0 0 #FFFFFF;
 }
 .buscarContent .buscar {
   border: 2px outset;
@@ -188,11 +186,6 @@ main, .content {
 .logoContent .themer-list .theme {
   width: 150px;
   height: 36px;
-}
-
-.createGif {
-  width: 684px;
-  height: 386px;
 }
 
 .buttons {
@@ -296,15 +289,32 @@ main, .content {
 .camera .gir {
   display: none;
 }
-.camera .ownGifs {
+
+.content .createGif {
+  display: block;
+  width: 684px;
+  height: 386px;
+  margin: auto;
+}
+.content .createGif .message .icon {
+  margin-top: 5%;
+}
+.content .createGif .message .instructions {
+  margin-top: 3%;
+}
+.content .createGif .buttons {
+  position: relative;
+  margin: 20px;
+  top: 5%;
+}
+.content .ownGifs {
   display: inline-block;
   margin: auto;
 }
-.camera .ownGifs .myGifs {
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: start;
+.content .ownGifs .myGifs {
+  display: block;
+  margin: auto 10%;
 }
-.camera .ownGifs .myGifs .myGif {
+.content .ownGifs .myGifs .myGif {
   margin: 10px;
 }
