@@ -234,9 +234,6 @@ main, .content {
   width: 838px;
   height: 440px;
 }
-.camera .cam img {
-  display: none;
-}
 .camera .cam video, .camera .cam img {
   border: solid;
   width: auto;
@@ -244,6 +241,44 @@ main, .content {
   background: #FFFFFF;
   border: 1px solid #979797;
   box-shadow: inset -2px -2px 0 0 #E6E6E6, inset 2px 2px 0 0 #000000;
+}
+.camera .cam .uploadInfo {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  align-content: center;
+  background-color: white;
+  border: 1px solid #979797;
+  box-shadow: inset -2px -2px 0 0 #E6E6E6, inset 2px 2px 0 0 #000000;
+}
+.camera .cam .uploadInfo .globe {
+  width: 48px;
+  height: 48px;
+  border: none;
+  box-shadow: none;
+}
+.camera .cam .uploadInfo .uploading {
+  font-family: ChakraPetch-Bold;
+  font-size: 16px;
+  color: #110038;
+  letter-spacing: 0;
+  text-align: center;
+  line-height: 22px;
+}
+.camera .cam .uploadInfo .uploadBar {
+  background: #B4B4B4;
+  box-shadow: inset 2px 2px 0 0 #FFFCFC, inset -2px -2px 0 0 #000000;
+}
+.camera .cam .uploadInfo .minutes {
+  font-family: ChakraPetch-Regular;
+  font-size: 12px;
+  color: rgba(17, 0, 56, 0.64);
+  letter-spacing: 0;
+  text-align: center;
+  line-height: 14px;
+}
+.camera .cam .uploadInfo .minutes span {
+  text-decoration: line-through;
 }
 .camera .buttons {
   margin: 3%;
@@ -260,4 +295,16 @@ main, .content {
 }
 .camera .gir {
   display: none;
+}
+.camera .ownGifs {
+  display: inline-block;
+  margin: auto;
+}
+.camera .ownGifs .myGifs {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: start;
+}
+.camera .ownGifs .myGifs .myGif {
+  margin: 10px;
 }

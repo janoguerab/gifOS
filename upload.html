@@ -20,7 +20,7 @@
         <div class="createGif box" id="createGif">
             <div class="bar">Crear Guifos</div>
             <div class="message">
-                <div class="icon"><img src="assets/window img.png" alt="icono de ventana"></div>
+                <div class="icon"><img src="assets/window_img.png" alt="icono de ventana"></div>
                 <div class="instructions">
                     <p class="title"><strong>Aquí podrás crear tus propios guifos</strong></p>
                     <div class="instructionsContent">
@@ -38,7 +38,6 @@
                 <div class="mainButton cancel" onclick="Cancel()">Cancelar</div>
                 <div class="mainButton beggin" onclick="getCamera()">Comenzar</div>
             </div>
-            </div>
             
         </div>
         <div class="camera box" id="camera">
@@ -47,8 +46,14 @@
                 <div class="close"></div>
             </div>
             <div class="cam box"> 
-                <video id="videocamera" src="" allow="microphone"></video>
-                <img src="" alt="Gif grabado" id="gif">
+                <video src="#" id="videocamera"></video>
+                <img src="#" alt="Gif grabado" id="gif">
+                <div class="uploadInfo" id="uploadInfo">
+                    <img class="globe" src="./assets/globe_img.png" alt="Imagen de Globo terraqueo">
+                    <p class="uploading">Estamos subiendo tu guifo…</p>
+                    <div class="uploadBar" id="uploadBar"></div>
+                    <p class="minutes">Tiempo restante: <span>38 años</span> algunos minutos</p>
+                </div>
             </div>
             <div class="buttons" id="buttons">
                 <div class="mainButton cameraIcon" id="cam" onclick="record()"><img id="cameraIcon" src="/assets/camera.svg" alt="Capturar"></div>
@@ -60,14 +65,10 @@
         </div>
         <div class="ownGifs" id="ownGifs">
             <div class="subtitle">Mis guifos</div>
-            <div id="myGifs"></div>
-        </div>
-        <div class="savedGifs">
-            <div class="subtitle">Guifos guardados: </div>
-            <div id="saved"></div>
+            <div id="myGifs" class="myGifs"></div>
         </div>
     </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/RecordRTC/5.5.8/RecordRTC.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/RecordRTC/5.5.8/RecordRTC.js"></script>
     <script src="js/gifOs.js"></script>
 </body>
 </html>

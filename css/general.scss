@@ -256,9 +256,7 @@ html, body {
         margin: 1% 2%;
         width: 838px;
         height: 440px;
-        img{
-            display: none;
-        }
+
         video, img {
             border: solid ;
             width: auto;
@@ -266,6 +264,44 @@ html, body {
             background: #FFFFFF;
             border: 1px solid #979797;
             box-shadow: inset -2px -2px 0 0 #E6E6E6, inset 2px 2px 0 0 #000000;
+        }
+        .uploadInfo{
+            display: flex;
+            flex-flow: column wrap;
+            justify-content: center;
+            align-content: center;
+            background-color: white;
+            border: 1px solid #979797;
+            box-shadow: inset -2px -2px 0 0 #E6E6E6, inset 2px 2px 0 0 #000000;
+            .globe{
+                width: 48px;
+                height: 48px;
+                border: none;
+                box-shadow: none;
+            }
+            .uploading{
+                font-family: ChakraPetch-Bold;
+                font-size: 16px;
+                color: #110038;
+                letter-spacing: 0;
+                text-align: center;
+                line-height: 22px;
+            }
+            .uploadBar{
+                background: #B4B4B4;
+                box-shadow: inset 2px 2px 0 0 #FFFCFC, inset -2px -2px 0 0 #000000;
+            }
+            .minutes{
+                font-family: ChakraPetch-Regular;
+                font-size: 12px;
+                color: rgba(17,0,56,0.64);
+                letter-spacing: 0;
+                text-align: center;
+                line-height: 14px;
+                span{
+                    text-decoration: line-through; 
+                }
+            }
         }
         
     }
@@ -284,5 +320,18 @@ html, body {
     }
     .gir{
         display: none;
+    }
+
+    .ownGifs{
+        display: inline-block;
+        margin: auto;
+        .myGifs{
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: start;
+            .myGif{
+                margin: 10px;
+            }
+        }
     }
 }

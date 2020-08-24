@@ -4,6 +4,7 @@ const TRENDING_URL   = 'http://api.giphy.com/v1/gifs/trending'
 const RANDOM_URL     = 'http://api.giphy.com/v1/gifs/random'
 const SEARCH_TAG     = 'http://api.giphy.com/v1/tags/related/'
 const UPLOAD_URL     = 'http://upload.giphy.com/v1/gifs'
+const GET_ByID       = 'http://api.giphy.com/v1/gifs/'
 const limitTrending  = 16
 const limitSearch    = 16
 const constraints    = { audio: false, video: { width: 838, height: 440 } }; 
@@ -151,6 +152,7 @@ function trending(){
 let stream;
 let recorder;
  
+//Get video from webcam
 function getCamera(){
     document.getElementById('createGif').style.display="none";
     document.getElementById('camera').style.display="flex";
@@ -236,8 +238,30 @@ function repeat(){
     record();
     
 }
+
+//Load all gif from LocalStorage
+function showMyGifs(){
+    let ids = JSON.parse(localStorage.getItem('IDs'));
+    let myGifs = document.getElementById("myGifs");
+    myGifs.innerHTML="";
+    if(ids){
+        ids.forEach( gif => {
+            fetch(GET_ByID + gif + '?api_key=' + window.atob(API_KEY_Base64))
+                .then(async response=>{
+                    const data = await response.json()
+                    let image = document.createElement('img')
+                    image.setAttribute('class', "box myGif")
+                    image.setAttribute('src', data.data.images.downsized.url)
+                    myGifs.appendChild(image)
+                })
+                .catch(error => {
+                    return console.log(error)
+                });
+        });
+    }
+}
 //Upload gif
-function upload(){
+async function upload(){
     let form = new FormData();
     form.append('file', recorder.getBlob(), 'myGif.gif');
     let params = {
@@ -245,28 +269,48 @@ function upload(){
         body: form,
         json: true
     };
-    let data = fetch(UPLOAD_URL+'?api_key=' + window.atob(API_KEY_Base64), params)
-        .then(response => {
-            return response.json()
-            .then(data =>{
-                let ids = JSON.parse(localStorage.getItem('IDs'));
-                console.log(ids)
-                if(ids){
-                    ids.push(data.data.id);
-                    localStorage.setItem('IDs', JSON.stringify(ids));
-                }else{
-                    let newIds=[data.data.id];
-                    localStorage.setItem('IDs',  JSON.stringify(newIds));
-                }
-            });
+    progressBar();
+    let data = await fetch(UPLOAD_URL+'?api_key=' + window.atob(API_KEY_Base64), params)
+        .then(async response => {
+            const data = await response.json()
+            let ids = JSON.parse(localStorage.getItem('IDs'))
+            if (ids) {
+                ids.push(data.data.id)
+                localStorage.setItem('IDs', JSON.stringify(ids))
+            }
+            else {
+                let newIds = [data.data.id]
+                localStorage.setItem('IDs', JSON.stringify(newIds))
+            }
+            repeat()
+            showMyGifs()
         })
         .catch(error => {
             return console.log(error)
         });
-    repeat();
-    
+   
 }
 
+// Upload Bar
+function progressBar() {
+    
+    let progressBar = document.getElementById('uploadBar');
+    progressBar.style.display = 'inline-block';
+    let counter = 0;
+    setInterval(function() {
+      progressBar.querySelectorAll('li')[liCounter].style.display = 'inline-block';
+      if (liCounter >= 15) {
+        progressBar.querySelectorAll('li').forEach(element => {
+          element.style.display = 'none';
+        })
+        liCounter = 0;
+      }else{
+        liCounter++;
+      }
+    }, 400);
+  };
+
+//record gif from camera
 function record(){  
     if (document.getElementById("capture").innerHTML != "Listo"){
         document.getElementById("cameraIcon").src="../assets/recording.svg"
@@ -333,11 +377,12 @@ function getTags(value){
 // starting when all render page is done!
 window.onload = () =>{
     if(document.getElementById('suggest')){
-        suggest()
+        suggest();
     }
     if(document.getElementById('list-result')){
-        trending()
+        trending();
     }
+    showMyGifs();
 }
 
 // function to set a given theme/color-scheme
