@@ -241,7 +241,7 @@ html, body {
 .camera{
     display: none;
     margin: auto;
-    width: 860px;
+    width: 920px;
     height: 548px;
 
     .cam{
@@ -298,20 +298,45 @@ html, body {
         
     }
     .buttons{
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-between;
+        align-content: center;
         margin: 3%;
-        .cameraIcon{
-            margin: 0;
-            width: 36px;
-            height: 36px;
+        .principal{
+            display: flex;
+            .cameraIcon{
+                margin: 0;
+                width: 36px;
+                height: 36px;
+            }
+            .capture{
+                margin: 0;
+                width: 144px;
+                height: 36px;
+            }
         }
-        .capture{
-            margin: 0;
-            width: 144px;
-            height: 36px;
+        
+        .recorded{
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: space-between;
+            align-content: center;
+            width: 100%;
+            
+            .timer{
+                display: none;
+                width: 124px;
+                height: 36px;
+                margin:auto;
+                flex-flow: column nowrap;
+                justify-content: center;
+                align-items: center;
+                background: #FFFFFF;
+                border: 1px solid #979797;
+                box-shadow: inset -2px -2px 0 0 #E6E6E6, inset 2px 2px 0 0 #000000;
+            }
         }
-    }
-    .gir{
-        display: none;
     }
 }
 
@@ -345,6 +370,19 @@ html, body {
             .myGif{
                margin: 10px;
             }
+        }
+    }
+    .camera{
+        .cam{
+            .video{
+                #gif{
+                    display: none;
+                }
+            }
+           
+        }
+        .uploadInfo{
+            display: none;
         }
     }
 }

@@ -43,23 +43,25 @@
         <div class="bartitle">Un Chequeo antes de Comenzar</div> 
         <div class="close"></div>
       </div>
-      <div class="cam box"> 
-      <div>
-        <video src="#" id="videocamera"></video>
-        <img src="#" alt="Gif grabado" id="gif">
+      <div class="cam"> 
+        <div class="video">
+          <video src="#" id="videocamera"></video>
+          <img src="#" alt="Gif grabado" id="gif">
+        </div>
+        <div class="uploadInfo" id="uploadInfo">
+          <img class="globe" src="./assets/globe_img.png" alt="Imagen de Globo terraqueo">
+          <p class="uploading">Estamos subiendo tu guifo…</p>
+          <div class="uploadBar" id="uploadBar"></div>
+          <p class="minutes">Tiempo restante: <span>38 años</span> algunos minutos</p>
+        </div>
       </div>
-      <div class="uploadInfo" id="uploadInfo">
-        <img class="globe" src="./assets/globe_img.png" alt="Imagen de Globo terraqueo">
-        <p class="uploading">Estamos subiendo tu guifo…</p>
-        <div class="uploadBar" id="uploadBar"></div>
-        <p class="minutes">Tiempo restante: <span>38 años</span> algunos minutos</p>
-      </div>
-    </div>
       <div class="buttons" id="buttons">
-        <div class="mainButton cameraIcon" id="cam" onclick="record()"><img id="cameraIcon" src="/assets/camera.svg" alt="Capturar"></div>
-        <div class="mainButton capture" id="capture" onclick="record()">Capturar</div>  
         <div class="recorded" id="recorded">
           <div class ="timer box" id="timer">00:00:00</div>
+        </div>
+        <div class="principal">
+          <div class="mainButton cameraIcon" id="cam" onclick="record()"><img id="cameraIcon" src="/assets/camera.svg" alt="Capturar"></div>
+          <div class="mainButton capture" id="capture" onclick="record()">Capturar</div>  
         </div>
       </div>
     </div>

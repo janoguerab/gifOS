@@ -155,7 +155,7 @@ let recorder;
 //Get video from webcam
 function getCamera(){
     document.getElementById('createGif').style.display="none";
-    document.getElementById('camera').style.display="flex";
+    document.getElementById('camera').style.display="inline-block";
     var video = document.querySelector('video');
     stream = navigator.mediaDevices.getUserMedia(constraints)
         .then(function(mediaStream) {
@@ -206,7 +206,7 @@ function stopInterval(){
     let recorded= document.getElementById("recorded");
     recorded.appendChild(repetir);
     recorded.appendChild(subir);
-
+    document.getElementById("timer").style.display = "flex";
     clearInterval(interval);
     seconds=0;
     recorder.stopRecording(function() {
@@ -316,7 +316,8 @@ function record(){
         document.getElementById("cameraIcon").src="../assets/recording.svg"
         document.getElementById("capture").innerHTML="Listo"
         document.getElementById("cam").setAttribute("onclick","stopInterval()");
-        document.getElementById("capture").setAttribute("onclick","stopInterval()")
+        document.getElementById("capture").setAttribute("onclick","stopInterval()");
+        document.getElementById("timer").style.display = "flex";
         interval = setInterval(setTime, 1000 );
         
 
@@ -326,6 +327,7 @@ function record(){
         document.getElementById("capture").innerHTML="Capturar"
         document.getElementById("cam").setAttribute("onclick","record()");
         document.getElementById("capture").setAttribute("onclick","record()");
+        document.getElementById("timer").style.display = "none";
         clearInterval(interval);
         seconds=0;
     }
