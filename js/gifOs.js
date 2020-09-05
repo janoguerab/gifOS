@@ -22,7 +22,11 @@ function search(value = document.getElementById('search').value){
                 for (let index = 0; index < data.data.length; index++) {
                    
                     let result = document.createElement('li')
-                    result.setAttribute("class",(index+1) % 5 == 0 ? 'resultLarge':'result')  //Evalues if puts a size Large or normal         
+                    result.setAttribute("class",(index+1) % 5 == 0 ? 'resultLarge largeBox':'result box')  //Evalues if puts a size Large or normal         
+
+                    let anchor = document.createElement('a')
+                    anchor.setAttribute('href',data.data[index].bitly_url)
+                    anchor.setAttribute('target','_blank')
 
                     let image = document.createElement('img')
                     image.setAttribute('class',(index+1) % 5 == 0 ? 'imageLarge':'image') //Evalues if puts a image Large or normal            
@@ -32,9 +36,26 @@ function search(value = document.getElementById('search').value){
                     imageInfo.setAttribute('class','bar')
                     imageInfo.innerHTML=''
 
-                    result.appendChild(image)
-                    result.appendChild(imageInfo)
-                    list.appendChild(result)
+
+                    let slugs = data.data[index].slug.split("-")
+                    let showSlug = ''
+                    let charCount = 0
+                    console.log(slugs)
+                    for (let index = 0; index <slugs.length-1; index++) {
+                        charCount += 1+slugs[index].length
+                        if(charCount < 30){
+                            showSlug += `#${slugs[index]} `
+                        }
+                    }
+                    if(showSlug==''){
+                        showSlug="#Gif"
+                    }
+
+                    imageInfo.innerHTML=showSlug
+                    anchor.appendChild(image)
+                    anchor.appendChild(imageInfo)
+                    result.appendChild(anchor)
+                    list.appendChild(result)    
                 }
             }
             
@@ -126,7 +147,11 @@ function trending(){
                 for (let index = 0; index < data.data.length; index++) {
                    
                     let result = document.createElement('li')
-                    result.setAttribute("class",(index+1) % 5 == 0 ? 'resultLarge':'result')  //Evalues if puts a size Large or normal         
+                    result.setAttribute("class",(index+1) % 5 == 0 ? 'resultLarge largeBox':'result box')  //Evalues if puts a size Large or normal       
+
+                    let anchor = document.createElement('a')
+                    anchor.setAttribute('href',data.data[index].bitly_url)
+                    anchor.setAttribute('target','_blank')
 
                     let image = document.createElement('img')
                     image.setAttribute('class',(index+1) % 5 == 0 ? 'imageLarge':'image') //Evalues if puts a image Large or normal            
@@ -134,10 +159,24 @@ function trending(){
 
                     let imageInfo = document.createElement('span')
                     imageInfo.setAttribute('class','bar')
-                    imageInfo.innerHTML=''
 
-                    result.appendChild(image)
-                    result.appendChild(imageInfo)
+                    let slugs = data.data[index].slug.split("-")
+                    let showSlug = ''
+                    let charCount = 0
+                    console.log(slugs)
+                    for (let index = 0; index <slugs.length-1; index++) {
+                        charCount += 1+slugs[index].length
+                        if(charCount < 30){
+                            showSlug += `#${slugs[index]} `
+                        }
+                    }
+                    if(showSlug==''){
+                        showSlug="#Gif"
+                    }
+                    imageInfo.innerHTML=showSlug
+                    anchor.appendChild(image)
+                    anchor.appendChild(imageInfo)
+                    result.appendChild(anchor)
                     list.appendChild(result)
                 }
             }
@@ -243,22 +282,25 @@ function repeat(){
 function showMyGifs(){
     let ids = JSON.parse(localStorage.getItem('IDs'));
     let myGifs = document.getElementById("myGifs");
-    myGifs.innerHTML="";
-    if(ids){
-        ids.forEach( gif => {
-            fetch(GET_ByID + gif + '?api_key=' + window.atob(API_KEY_Base64))
-                .then(async response=>{
-                    const data = await response.json()
-                    let image = document.createElement('img')
-                    image.setAttribute('class', "box myGif")
-                    image.setAttribute('src', data.data.images.downsized.url)
-                    myGifs.appendChild(image)
-                })
-                .catch(error => {
-                    return console.log(error)
-                });
-        });
+    if(myGifs){
+        myGifs.innerHTML="";
+        if(ids){
+            ids.forEach( gif => {
+                fetch(GET_ByID + gif + '?api_key=' + window.atob(API_KEY_Base64))
+                    .then(async response=>{
+                        const data = await response.json()
+                        let image = document.createElement('img')
+                        image.setAttribute('class', "box myGif")
+                        image.setAttribute('src', data.data.images.downsized.url)
+                        myGifs.appendChild(image)
+                    })
+                    .catch(error => {
+                        return console.log(error)
+                    });
+            });
+        }
     }
+    
 }
 //Upload gif
 async function upload(){

@@ -2,14 +2,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;700&display=swap');
 
 %normalImage{
-    width: 288px;
-    height: 298px;
+    width: 280px;
+    height: 292px;
     margin: 5px;
 }
 %largeImage{
-    width: 576px;
+    width: 570px;
     height: 298px;
-    margin: 5px;
+    margin: 2px;
 }
 
 html, body {
@@ -18,6 +18,12 @@ html, body {
     height: 100%;
     width: 100%;
     font-family: 'Chakra Petch', sans-serif;
+    .box, .largeBox{
+        box-shadow: inset -2px -2px 0 0 #B4B4B4, inset 2px 2px 0 0 #FFFFFF;
+        .bar{
+            margin:2px;
+        }
+    }
   }
 
   main, .content{
@@ -26,22 +32,62 @@ html, body {
     justify-content: center;
     align-content: center;
   }
-
+ 
 #list-result, #search-result{
     display: flex;
     flex-flow: row wrap;
     list-style: none;
+    .box{
+        width: 290px;
+        height: 300px;
+    }
+    .largeBox{
+        width: 576px;
+        height: 300px;
+    }
     .result{
-        @extend %normalImage;   
+        @extend %normalImage; 
+        .bar{
+            display: none;
+        }
     }
+
+    .result:hover {
+        .bar{
+            border: 1px solid #000;
+            margin: auto;
+            width: 99%;
+            display: inline-block;
+            position: relative;
+            bottom: 11.5%;
+        }
+    }
+
     .image{
+        position: relative;
         @extend %normalImage;
+        cursor: pointer;
     }
+    
     .resultLarge{
         @extend %largeImage;
+        .bar{
+            display: none;
+        }
+    }
+    .resultLarge:hover {
+        .bar{
+            border: 1px solid #000;
+            margin: auto;
+            width: 99%;
+            display: inline-block;
+            position: relative;
+            bottom: 11.5%;
+        }
     }
     .imageLarge{
         @extend %largeImage;
+        cursor: pointer;
     }
 }
 .suggest{
@@ -76,6 +122,7 @@ html, body {
     
 }
 .bar{
+    width: 100%;
     height: 24px;
     box-shadow: 0 1px 0 0 #110038;
 }
@@ -112,13 +159,20 @@ html, body {
                 width: 131px;
                 height: 36px;
             }
+            .select{
+                display: flex;
+                p{
+                    margin: auto;
+                }
+            }
             .down{
                 width: 36px;
                 height: 36px;
+                border-left: 1px solid #000;
                 background-image: url(../assets/dropdown.svg);
                 background-repeat: no-repeat;
-    
                 background-position: center; 
+                margin:0;
             }
             .theme-list{
                 display: flex;
@@ -143,7 +197,11 @@ html, body {
     align-content: center;
     cursor: pointer;
 }
-
+.dropdown{
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+}
 .subtitle{
     max-width: 1200px;
     min-width: 80vw;
