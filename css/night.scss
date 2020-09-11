@@ -1,7 +1,9 @@
 .theme-night{
     $right : #EE3EFE;
     $left : #2E32FB;
-
+    a{
+        color: white;
+    }
     .box{
         margin: auto;
         background: #B4B4B4;
@@ -27,11 +29,18 @@
         background: $left;
         border: 1px solid #4C2F99;
         box-shadow: inset -2px -2px 0 0 #2124B3, inset 2px 2px 0 0 #FFFFFF;
+        color: white;
+    }
+    .own:hover{
+        border: 1px solid #FFFFFF;
     }
     .themer-list
     {
         background: #B4B4B4;
         box-shadow: inset -2px -2px 0 0 #8F8F8F, inset 2px 2px 0 0 #FFFFFF;
+        .theme:hover{
+            background: #2E32FB;
+        }
         .theme{
             background: #CCCCCC;
             border: 1px solid #808080;

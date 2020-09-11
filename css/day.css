@@ -18,9 +18,15 @@
   border: 1px solid #4C2F99;
   box-shadow: inset -2px -2px 0 0 #284F99, inset 2px 2px 0 0 #FFFFFF;
 }
+.theme-day .own:hover {
+  border: 1px solid #110038;
+}
 .theme-day .theme-list {
   background: #E6E6E6;
   box-shadow: inset -2px -2px 0 0 #B4B4B4, inset 2px 2px 0 0 #FFFFFF;
+}
+.theme-day .theme-list .theme:hover {
+  background: #FFF4FD;
 }
 .theme-day .content .box, .theme-day .content .largeBox {
   background: #E6E6E6;

@@ -429,18 +429,25 @@ window.onload = () =>{
     showMyGifs();
 }
 
-// function to set a given theme/color-scheme
+function themer(){
+    let list = document.getElementById("theme-list");
+    list.style.display = list.style.display == "none" ? "flex": "none";
+}
+
+// function to set a given theme color
 function setTheme(themeName) {
     localStorage.setItem('theme', themeName);
     document.documentElement.className = themeName;
-}// function to toggle between day and night theme
-function toggleTheme() {
-   if (localStorage.getItem('theme') === 'theme-night'){
-       setTheme('theme-day');
-   } else {
-       setTheme('theme-night');
-   }
-}// Immediately invoked function to set the theme on initial load
+}
+function themeDay() {
+    setTheme('theme-day');
+    themer();
+}
+function themeNight(){
+    setTheme('theme-night');
+    themer();
+}
+// Immediately invoked function to set the theme on initial load
 (function () {
    if (localStorage.getItem('theme') === 'theme-night') {
        setTheme('theme-night');
