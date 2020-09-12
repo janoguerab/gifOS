@@ -9,9 +9,9 @@ const limitTrending  = 16
 const limitSearch    = 16
 const constraints    = { audio: false, video: { width: 838, height: 440 } }; 
 
-function search(value = document.getElementById('search').value){
+async function search(value = document.getElementById('search').value){
     document.getElementById('search').value = value;
-    let found = fetch( SEARCH_URL +'?q=' + value + '&api_key=' + window.atob(API_KEY_Base64))
+    let found = await fetch( SEARCH_URL +'?q=' + value + '&api_key=' + window.atob(API_KEY_Base64))
         .then(response => {
             return response.json()
         })
@@ -110,9 +110,9 @@ function suggest(){
    }
    
 }
-function createSuggest(index,list){
+async function createSuggest(index,list){
 
-        let found = fetch( RANDOM_URL + '?api_key=' + window.atob(API_KEY_Base64))
+        let found = await fetch( RANDOM_URL + '?api_key=' + window.atob(API_KEY_Base64))
         .then(response => {
             return response.json()
         })
@@ -164,8 +164,8 @@ function createSuggest(index,list){
         })
         
 }
-function trending(){
-    let found = fetch( TRENDING_URL +'?limit=' + limitTrending + '&api_key=' + window.atob(API_KEY_Base64))
+async function trending(){
+    let found = await fetch( TRENDING_URL +'?limit=' + limitTrending + '&api_key=' + window.atob(API_KEY_Base64))
         .then(response => {
             return response.json()
         })
@@ -314,7 +314,7 @@ function showMyGifs(){
         myGifs.innerHTML="";
         if(ids){
             ids.forEach( gif => {
-                fetch(GET_ByID + gif + '?api_key=' + window.atob(API_KEY_Base64))
+             fetch(GET_ByID + gif + '?api_key=' + window.atob(API_KEY_Base64))
                     .then(async response=>{
                         const data = await response.json()
                         let image = document.createElement('img')
