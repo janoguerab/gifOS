@@ -2,7 +2,7 @@ const API_KEY_Base64 = 'OVg0d1NYSTVETDA4UUhRcUNJMGI4MWhMSjI0NXVUbFg=' //Encoded 
 const SEARCH_URL     = 'http://api.giphy.com/v1/gifs/search'
 const TRENDING_URL   = 'http://api.giphy.com/v1/gifs/trending'
 const RANDOM_URL     = 'http://api.giphy.com/v1/gifs/random'
-const SEARCH_TAG     = 'http://api.giphy.com/v1/tags/related/'
+const SEARCH_TAGSUG  = 'http://api.giphy.com/v1/gifs/search/tags'
 const UPLOAD_URL     = 'http://upload.giphy.com/v1/gifs'
 const GET_ByID       = 'http://api.giphy.com/v1/gifs/'
 const limitTrending  = 16
@@ -10,7 +10,7 @@ const limitSearch    = 16
 const constraints    = { audio: false, video: { width: 838, height: 440 } }; 
 
 function search(value = document.getElementById('search').value){
-    getTags(value);
+    document.getElementById('search').value = value;
     let found = fetch( SEARCH_URL +'?q=' + value + '&api_key=' + window.atob(API_KEY_Base64))
         .then(response => {
             return response.json()
@@ -66,6 +66,37 @@ function search(value = document.getElementById('search').value){
     return found
 }
 
+// Search autocomplete suggest
+async function sugerencia(){
+    let value = document.getElementById('search').value
+    let tags = document.getElementById('tags')
+    let found = await fetch( SEARCH_TAGSUG +'?q=' + value + '&api_key=' + window.atob(API_KEY_Base64))
+    .then(response => {
+        tags.innerHTML=''
+        return response.json()
+    })
+    .then(data => { // Get Searched images, puts into results
+        if(data.data.length > 0){
+            tags.innerHTML=''
+            tags.style.display="block"
+            for (let index = 0; index < (data.data.length > 3 ? 3 : data.data.length); index++) {
+                let tag = document.createElement('div')
+                let insideContent = document.createElement('div')
+                tag.setAttribute('class','tag')
+                insideContent.setAttribute('class','insidecontent')
+                insideContent.setAttribute('onClick','search("'+data.data[index].name+'")')
+                insideContent.innerText = data.data[index].name
+                tag.appendChild(insideContent)
+                tags.appendChild(tag)
+            }
+        }else{
+            tags.style.display="none"
+        }
+    }).catch({})
+    .catch({})
+}
+
+// Suggest Gifs
 function suggest(){
     
     var list = document.getElementById('suggest')
@@ -77,8 +108,7 @@ function suggest(){
         createSuggest(index,list)
        
    }
-
-    
+   
 }
 function createSuggest(index,list){
 
@@ -382,39 +412,6 @@ function autocomplete(){
     }, 1000); // Will do the ajax stuff after 1000 ms, or 1 s   
 }
 
-//search suggestions
-function getTags(value){
-        let found = fetch( SEARCH_TAG + value + '?api_key=' + window.atob(API_KEY_Base64))
-        .then(response => {
-            return response.json()
-        })
-        .then(data => { // Get Searched images, puts into results
-            if(data.data.length > 0){
-                var list = document.getElementById('tags')
-                list.innerHTML='' //Remove before results
-                
-                for (let index = 0; index < data.data.length; index++) {
-                   
-                    let seeMoreButton = document.createElement('div')
-                    seeMoreButton.setAttribute("class",'tag')
-                    seeMoreButton.addEventListener("click",() =>{
-                        search(data.data.name)
-                        document.getElementById('searchResult').scrollIntoView();  // Desplaze to result
-                        })
-                    seeMoreButton.setAttribute("id",'tag-'+index) 
-                    seeMoreButton.innerText=data.data.name
-                    list.appendChild(seeMoreButton)
-                }
-                
-            }
-            
-            return data
-        })
-        .catch(error => {
-            return error
-        })
-    return found;
-}
 
 // starting when all render page is done!
 window.onload = () =>{

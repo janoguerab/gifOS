@@ -221,6 +221,8 @@ main, .content {
   background-color: #FFFAFE;
   display: flex;
   margin: 20px auto;
+  padding-left: 5px;
+  padding-top: 5px;
 }
 
 .upBar {
@@ -247,6 +249,10 @@ main, .content {
   flex-flow: row wrap;
   justify-content: space-evenly;
   align-content: center;
+  cursor: pointer;
+}
+.buscarContent .buscar .lupa {
+  content: url("../assets/lupa_inactive.svg");
 }
 .buscarContent .search {
   width: 1057px;
@@ -255,6 +261,22 @@ main, .content {
   flex-flow: row wrap;
   justify-content: start;
   align-content: center;
+}
+
+.tags {
+  width: 1200px;
+  display: none;
+}
+.tags .tag {
+  margin: 11px;
+  width: 1057px;
+  height: 36px;
+  cursor: pointer;
+}
+.tags .tag .insidecontent {
+  height: 20px;
+  padding: 7px;
+  text-align: left;
 }
 
 .insidecontent {
@@ -271,6 +293,7 @@ main, .content {
   position: relative;
   bottom: 20%;
   left: 5%;
+  cursor: pointer;
 }
 
 .logoContent .themer-list {

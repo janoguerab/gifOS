@@ -19,7 +19,7 @@
     .mainButton{
         background-color: $right;
         color: white;
-        border: 1px dotted #110038;
+        border: 1px solid #110038;
         box-shadow: inset -1px -1px 0 0 #A72CB3, inset 1px 1px 0 0 #FFFFFF;
     }
     .insidecontent:hover{
@@ -28,8 +28,28 @@
         box-shadow: inset -1px -1px 0 0 #A72CB3, inset 1px 1px 0 0 #FFFFFF;
         
     }
+    .search{
+        background: #FFFFFF;
+        border: 1px solid #979797;
+        box-shadow: inset -2px -2px 0 0 #E6E6E6, inset 2px 2px 0 0 #000000;
+        padding-left: 7px;
+    }
     .buscarContent{
         background-color: #B4B4B4;
+    }
+    .tags{
+        background: #B4B4B4;
+        box-shadow: inset -2px -2px 0 0 #8F8F8F, inset 2px 2px 0 0 #FFFFFF;
+        .tag{
+            background: #CCCCCC;
+            border: 1px solid #808080;
+            box-shadow: inset -1px -1px 0 0 #B4B4B4, inset 1px 1px 0 0 #FFFFFF;
+        }
+        .insidecontent:hover{
+            background: #B4B4B4;
+            border: 1px dotted;
+            box-shadow: inset -1px -1px 0 0 #8F8F8F, inset 2px 2px 0 0 #FFFFFF;
+        }
     }
     .seeMore{
         background: $left;

@@ -15,8 +15,36 @@
   border: 1px dotted #110038;
   box-shadow: inset -1px -1px 0 0 #997D97, inset 1px 1px 0 0 #FFFFFF;
 }
+.theme-day .search {
+  background: #FFFFFF;
+  border: 1px solid #979797;
+  box-shadow: inset -2px -2px 0 0 #E6E6E6, inset 2px 2px 0 0 #000000;
+  padding-left: 7px;
+}
+.theme-day .search:focus ~ #buscar {
+  background: #F7C9F3;
+  border: 1px solid #110038;
+  box-shadow: inset -1px -1px 0 0 #997D97, inset 1px 1px 0 0 #FFFFFF;
+}
+.theme-day .search:focus ~ #buscar .lupa {
+  content: url("../assets/lupa.svg");
+}
 .theme-day .buscarContent {
   background-color: #E6E6E6;
+}
+.theme-day .tags {
+  background: #E6E6E6;
+  box-shadow: inset -2px -2px 0 0 #B4B4B4, inset 2px 2px 0 0 #FFFFFF;
+}
+.theme-day .tags .tag {
+  background: #F0F0F0;
+  border: 1px solid #808080;
+  box-shadow: inset -1px -1px 0 0 #B4B4B4, inset 1px 1px 0 0 #FFFFFF;
+}
+.theme-day .tags .insidecontent:hover {
+  background: #DBDBDB;
+  border: 1px dotted #808080;
+  box-shadow: inset -1px -1px 0 0 #B4B4B4, inset 1px 1px 0 0 #FFFFFF;
 }
 .theme-day .seeMore {
   background: #4180F6;
