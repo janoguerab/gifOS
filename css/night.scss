@@ -56,11 +56,11 @@
         border: 1px solid #4C2F99;
         box-shadow: inset -2px -2px 0 0 #2124B3, inset 2px 2px 0 0 #FFFFFF;
         color: white;
-        .insidecontent:hover{
-            background: #2629CC;
-            border: 1px solid #4C2F99;
-            box-shadow: inset -2px -2px 0 0 #2124B3, inset 2px 2px 0 0 #FFFFFF;
-        }
+    }
+    .seeMore:hover{
+        background: #2629CC;
+        border: 1px dotted #4C2F99;
+        box-shadow: inset -2px -2px 0 0 #2124B3, inset 2px 2px 0 0 #FFFFFF;
     }
     .own:hover{
         border: 1px dotted #FFFFFF;

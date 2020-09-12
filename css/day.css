@@ -51,9 +51,9 @@
   border: 1px solid #4C2F99;
   box-shadow: inset -2px -2px 0 0 #284F99, inset 2px 2px 0 0 #FFFFFF;
 }
-.theme-day .seeMore .insidecontent:hover {
+.theme-day .seeMore:hover {
   background: #3A72DB;
-  border: 1px solid #4C2F99;
+  border: 1px dotted #4C2F99;
   box-shadow: inset -2px -2px 0 0 #284F99, inset 2px 2px 0 0 #FFFFFF;
 }
 .theme-day .own:hover {

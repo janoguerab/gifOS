@@ -54,11 +54,12 @@
         background: $left;
         border: 1px solid #4C2F99;
         box-shadow: inset -2px -2px 0 0 #284F99, inset 2px 2px 0 0 #FFFFFF;
-        .insidecontent:hover{
-            background: #3A72DB;
-            border: 1px solid #4C2F99;
-            box-shadow: inset -2px -2px 0 0 #284F99, inset 2px 2px 0 0 #FFFFFF;
-        }
+        
+    }
+    .seeMore:hover{
+        background: #3A72DB;
+        border: 1px dotted #4C2F99;
+        box-shadow: inset -2px -2px 0 0 #284F99, inset 2px 2px 0 0 #FFFFFF;
     }
     .own:hover{
         border: 1px dotted #110038;
