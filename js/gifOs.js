@@ -40,7 +40,6 @@ function search(value = document.getElementById('search').value){
                     let slugs = data.data[index].slug.split("-")
                     let showSlug = ''
                     let charCount = 0
-                    console.log(slugs)
                     for (let index = 0; index <slugs.length-1; index++) {
                         charCount += 1+slugs[index].length
                         if(charCount < 30){
@@ -163,7 +162,6 @@ function trending(){
                     let slugs = data.data[index].slug.split("-")
                     let showSlug = ''
                     let charCount = 0
-                    console.log(slugs)
                     for (let index = 0; index <slugs.length-1; index++) {
                         charCount += 1+slugs[index].length
                         if(charCount < 30){

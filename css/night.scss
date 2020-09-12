@@ -19,8 +19,14 @@
     .mainButton{
         background-color: $right;
         color: white;
+        border: 1px dotted #110038;
+        box-shadow: inset -1px -1px 0 0 #A72CB3, inset 1px 1px 0 0 #FFFFFF;
+    }
+    .insidecontent:hover{
+        background: #CE36DB;
         border: 1px solid #110038;
         box-shadow: inset -1px -1px 0 0 #A72CB3, inset 1px 1px 0 0 #FFFFFF;
+        
     }
     .buscarContent{
         background-color: #B4B4B4;
@@ -30,22 +36,28 @@
         border: 1px solid #4C2F99;
         box-shadow: inset -2px -2px 0 0 #2124B3, inset 2px 2px 0 0 #FFFFFF;
         color: white;
+        .insidecontent:hover{
+            background: #2629CC;
+            border: 1px solid #4C2F99;
+            box-shadow: inset -2px -2px 0 0 #2124B3, inset 2px 2px 0 0 #FFFFFF;
+        }
     }
     .own:hover{
-        border: 1px solid #FFFFFF;
+        border: 1px dotted #FFFFFF;
     }
-    .themer-list
-    {
+    .theme-list{
         background: #B4B4B4;
         box-shadow: inset -2px -2px 0 0 #8F8F8F, inset 2px 2px 0 0 #FFFFFF;
-        .theme:hover{
-            background: #2E32FB;
-        }
         .theme{
             background: #CCCCCC;
             border: 1px solid #808080;
             box-shadow: inset -1px -1px 0 0 #B4B4B4, inset 1px 1px 0 0 #FFFFFF;
         }
+        .theme:hover{
+            color:white;
+            background: #2E32FB;
+        }
+        
     }
     .content{
         .box, .largeBox{

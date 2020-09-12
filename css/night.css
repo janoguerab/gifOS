@@ -16,6 +16,11 @@
 .theme-night .mainButton {
   background-color: #EE3EFE;
   color: white;
+  border: 1px dotted #110038;
+  box-shadow: inset -1px -1px 0 0 #A72CB3, inset 1px 1px 0 0 #FFFFFF;
+}
+.theme-night .insidecontent:hover {
+  background: #CE36DB;
   border: 1px solid #110038;
   box-shadow: inset -1px -1px 0 0 #A72CB3, inset 1px 1px 0 0 #FFFFFF;
 }
@@ -28,20 +33,26 @@
   box-shadow: inset -2px -2px 0 0 #2124B3, inset 2px 2px 0 0 #FFFFFF;
   color: white;
 }
-.theme-night .own:hover {
-  border: 1px solid #FFFFFF;
+.theme-night .seeMore .insidecontent:hover {
+  background: #2629CC;
+  border: 1px solid #4C2F99;
+  box-shadow: inset -2px -2px 0 0 #2124B3, inset 2px 2px 0 0 #FFFFFF;
 }
-.theme-night .themer-list {
+.theme-night .own:hover {
+  border: 1px dotted #FFFFFF;
+}
+.theme-night .theme-list {
   background: #B4B4B4;
   box-shadow: inset -2px -2px 0 0 #8F8F8F, inset 2px 2px 0 0 #FFFFFF;
 }
-.theme-night .themer-list .theme:hover {
-  background: #2E32FB;
-}
-.theme-night .themer-list .theme {
+.theme-night .theme-list .theme {
   background: #CCCCCC;
   border: 1px solid #808080;
   box-shadow: inset -1px -1px 0 0 #B4B4B4, inset 1px 1px 0 0 #FFFFFF;
+}
+.theme-night .theme-list .theme:hover {
+  color: white;
+  background: #2E32FB;
 }
 .theme-night .content .box, .theme-night .content .largeBox {
   background: #B4B4B4;

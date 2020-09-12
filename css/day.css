@@ -10,6 +10,11 @@
   border: 1px solid #110038;
   box-shadow: inset -1px -1px 0 0 #997D97, inset 1px 1px 0 0 #FFFFFF;
 }
+.theme-day .insidecontent:hover {
+  background: #E6BBE2;
+  border: 1px dotted #110038;
+  box-shadow: inset -1px -1px 0 0 #997D97, inset 1px 1px 0 0 #FFFFFF;
+}
 .theme-day .buscarContent {
   background-color: #E6E6E6;
 }
@@ -18,12 +23,22 @@
   border: 1px solid #4C2F99;
   box-shadow: inset -2px -2px 0 0 #284F99, inset 2px 2px 0 0 #FFFFFF;
 }
+.theme-day .seeMore .insidecontent:hover {
+  background: #3A72DB;
+  border: 1px solid #4C2F99;
+  box-shadow: inset -2px -2px 0 0 #284F99, inset 2px 2px 0 0 #FFFFFF;
+}
 .theme-day .own:hover {
-  border: 1px solid #110038;
+  border: 1px dotted #110038;
 }
 .theme-day .theme-list {
   background: #E6E6E6;
   box-shadow: inset -2px -2px 0 0 #B4B4B4, inset 2px 2px 0 0 #FFFFFF;
+}
+.theme-day .theme-list .theme {
+  background: #F0F0F0;
+  border: 1px solid #808080;
+  box-shadow: inset -1px -1px 0 0 #B4B4B4, inset 1px 1px 0 0 #FFFFFF;
 }
 .theme-day .theme-list .theme:hover {
   background: #FFF4FD;
