@@ -8,11 +8,11 @@
 </head>
 <body>
     <header class="bar">
-        ¡Bienvenidos/as a Guifos.com! ------Donde los gifs están./////// Número de visistas: <span id="visits"></span>
+        ¡Bienvenidos/as a Guifos.com! ------Donde los gifs están./////// Número de visistas: 12.765.803
     </header>
     <main>
         <div class="logoContent">
-            <img class="logo" src="assets/gifOF_logo.png" alt="gif.OS Logo">
+            <img id="logo" class="logo" src="" alt="gif.OS Logo">
             <div class="butons">
                 <a href="upload.html" target="_self"><div class="mainButton insidecontent create">Crear Guifos</div></a>
                 <div class="themer">
@@ -33,20 +33,20 @@
             </div>
         </div>
         <div class="buscarContent box">
-            <div class="bar">Buscar</div>
+            <div class="bar"><div class="title">Buscar</div></div>
             <input id="search" autocomplete="off" oninput="sugerencia()" class="search" type="text" placeholder="Buscar gifs, hashtags, temas, busca lo que quieras...">
-            <div id="buscar" class="buscar" onclick="search()"><img class="lupa" src="" alt="lupa para buscas"> Buscar</div>
+            <div id="buscar" class="buscar" onclick="search()"><img class="lupa" src="" alt="lupa para buscas">Buscar</div>
         </div>
         <div class="box tags" id="tags"></div>
     </main>
     <div class="content">
-        <div class="suregimosContent">
+        <div class="suregimosContent" id="suregimosContent">
             <div>
                 <p class="subtitle">Hoy te sugerimos:</p>
             </div>
             <div class="suggest" id="suggest"></div>
         </div>
-        <div class="Treding">
+        <div class="Treding" id="Treding">
             <p class="subtitle">Tendencias:</p>
             <ul id="list-result"></ul >
             

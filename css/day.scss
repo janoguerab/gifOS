@@ -3,6 +3,11 @@
     $left : #4180F6;
     body{
         background-color: #fff4fd;
+        .logoContent, .logoContent2{
+            .logo{
+                content:url("../assets/gifOF_logo.png");
+            }
+        }
     }
     .bar{
         background: linear-gradient(to right, $left , $right);
@@ -35,6 +40,11 @@
     }
     .buscarContent{
         background-color: #E6E6E6;
+    }
+    .subtitle{
+        background: #FFFAFE;
+        border: 1px solid #E6BBE2;
+        box-shadow: inset -2px -2px 0 0 #E6DCE4, inset 2px 2px 0 0 #80687D;
     }
     .tags{
         background: #E6E6E6;
@@ -82,5 +92,23 @@
             background: #E6E6E6;
             box-shadow: inset -2px -2px 0 0 #B4B4B4, inset 2px 2px 0 0 #FFFFFF;
         }
+    }
+    .repButton{
+        color: black;
+        background: #FFF4FD;
+        border: 1px solid #110038;
+        box-shadow: inset -1px -1px 0 0 #997D97, inset 1px 1px 0 0 #FFFFFF;
+    }
+    .repButton:hover{
+        background: #F0E5EE;
+        border: 1px dotted #110038;
+        box-shadow: inset -1px -1px 0 0 #997D97, inset 1px 1px 0 0 #FFFFFF;
+    }
+    #cameraIcon{
+        content:url("../assets/camera.svg");
+        background-repeat: no-repeat;
+    }
+    .section{
+        background: #F7C9F3;
     }
 }

@@ -8,9 +8,11 @@ const GET_ByID       = 'http://api.giphy.com/v1/gifs/'
 const limitTrending  = 16
 const limitSearch    = 16
 const constraints    = { audio: false, video: { width: 838, height: 440 } }; 
-
+let myGifURL         = '';
+let color            = '';
 async function search(value = document.getElementById('search').value){
     document.getElementById('search').value = value;
+    document.getElementById('tags').style.display="none"
     let found = await fetch( SEARCH_URL +'?q=' + value + '&api_key=' + window.atob(API_KEY_Base64))
         .then(response => {
             return response.json()
@@ -68,6 +70,7 @@ async function search(value = document.getElementById('search').value){
 
 // Search autocomplete suggest
 async function sugerencia(){
+    document.getElementById('searchResult').style.display="inline-block"
     let value = document.getElementById('search').value
     let tags = document.getElementById('tags')
     let found = await fetch( SEARCH_TAGSUG +'?q=' + value + '&api_key=' + window.atob(API_KEY_Base64))
@@ -77,6 +80,8 @@ async function sugerencia(){
     })
     .then(data => { // Get Searched images, puts into results
         if(data.data.length > 0){
+            document.getElementById('suregimosContent').style.display="none"
+            document.getElementById('Treding').style.display="none"
             tags.innerHTML=''
             tags.style.display="block"
             for (let index = 0; index < (data.data.length > 3 ? 3 : data.data.length); index++) {
@@ -91,6 +96,9 @@ async function sugerencia(){
             }
         }else{
             tags.style.display="none"
+            document.getElementById('suregimosContent').style.display="inline-block"
+            document.getElementById('Treding').style.display="inline-block"
+
         }
     }).catch({})
     .catch({})
@@ -142,6 +150,8 @@ async function createSuggest(index,list){
                 seeMoreButton.setAttribute("class",'seeMore')
                 seeMoreButton.addEventListener("click",() =>{
                     search(data.data.title.split('GIF')[0])
+                    document.getElementById('searchResult').style.display="inline-block"
+                    document.getElementById('Treding').style.display="none"
                     document.getElementById('searchResult').scrollIntoView();  // Desplaze to result
                     })
                 seeMoreButton.setAttribute("id",'seeMore-'+index) 
@@ -221,6 +231,7 @@ let recorder;
  
 //Get video from webcam
 function getCamera(){
+    document.getElementById('ownGifs').style.display="none"
     document.getElementById('createGif').style.display="none";
     document.getElementById('camera').style.display="inline-block";
     var video = document.querySelector('video');
@@ -239,7 +250,9 @@ function getCamera(){
                 hidden: 240,
                 quality: 10});
         })
-        .catch(function(err) { console.log(err.name + ": " + err.message); }); // always check for errors at the end.
+        .catch(function(err) { 
+
+        }); // always check for errors at the end.
 
         
 }
@@ -256,17 +269,20 @@ function setTime(){
 let interval;
 
 // Stop Interval
-function stopInterval(){
+function stopInterval(camara){
+    document.getElementById("title").innerHTML = "Vista Previa";
     document.getElementById("cam").style.display = "none";
     document.getElementById("capture").style.display = "none";
-
+    document.getElementById("cam").style.background=color;
+    document.getElementById("capture").style.background=color;
+    document.getElementById("cameraIcon").src=camara;
     let repetir = document.createElement("div");
-    repetir.setAttribute("class","mainButton");
+    repetir.setAttribute("class","mainButton repButton");
     repetir.setAttribute("id","repetir");
     repetir.setAttribute("onclick","repeat()");
     repetir.innerHTML="Repetir Captura";
     let subir   = document.createElement("div");
-    subir.setAttribute("class","mainButton");
+    subir.setAttribute("class","mainButton repButton");
     subir.setAttribute("onclick","upload()");
     subir.setAttribute("id","subir");
     subir.innerHTML="Subir Guifo";
@@ -276,16 +292,20 @@ function stopInterval(){
     document.getElementById("timer").style.display = "flex";
     clearInterval(interval);
     seconds=0;
-    recorder.stopRecording(function() {
-        var blob = this.getBlob();
-        document.getElementById("videocamera").style.display="none";
-        var gif = document.getElementById("gif");
-        gif.style.display="flex";
-        gif.src = URL.createObjectURL(blob);
-    });
+    try{
+        recorder.stopRecording(function() {
+            var blob = this.getBlob();
+            document.getElementById("videocamera").style.display="none";
+            var gif = document.getElementById("gif");
+            gif.style.display="flex";
+            gif.src = URL.createObjectURL(blob);
+        });
+    }catch(e){}
 }
 //Repeat Gifo
 function repeat(){
+    document.getElementById("cam").style.background=color;
+    document.getElementById("capture").style.background=color;
     recorder.destroy();
     getCamera();
     document.getElementById("videocamera").style.display="flex";
@@ -317,13 +337,19 @@ function showMyGifs(){
              fetch(GET_ByID + gif + '?api_key=' + window.atob(API_KEY_Base64))
                     .then(async response=>{
                         const data = await response.json()
+                        let anchor = document.createElement('a')
+                        anchor.setAttribute('target','_blank')
+                        anchor.setAttribute('href',data.data.url)
                         let image = document.createElement('img')
-                        image.setAttribute('class', "box myGif")
+                        image.setAttribute('class', "myGif")
                         image.setAttribute('src', data.data.images.downsized.url)
-                        myGifs.appendChild(image)
+                        image.setAttribute('alt','myGif')
+
+                        anchor.appendChild(image)
+                        
+                        myGifs.appendChild(anchor)
                     })
                     .catch(error => {
-                        return console.log(error)
                     });
             });
         }
@@ -332,6 +358,8 @@ function showMyGifs(){
 }
 //Upload gif
 async function upload(){
+    document.getElementById("cam").style.background=color;
+    document.getElementById("capture").style.background=color;
     let form = new FormData();
     form.append('file', recorder.getBlob(), 'myGif.gif');
     let params = {
@@ -343,6 +371,18 @@ async function upload(){
     let data = await fetch(UPLOAD_URL+'?api_key=' + window.atob(API_KEY_Base64), params)
         .then(async response => {
             const data = await response.json()
+            let id = data.data.id;
+            fetch(GET_ByID + id + '?api_key=' + window.atob(API_KEY_Base64))
+                    .then(async response=>{
+                        const data = await response.json()
+                        document.getElementById('downloadGif').setAttribute('href',data.data.images.downsized.url)
+                        document.getElementById('uploadedGif').setAttribute('src',data.data.images.downsized.url)
+                        myGifURL = data.data.url
+                    })
+                    .catch(error => {
+                    });
+           
+            
             let ids = JSON.parse(localStorage.getItem('IDs'))
             if (ids) {
                 ids.push(data.data.id)
@@ -354,48 +394,104 @@ async function upload(){
             }
             repeat()
             showMyGifs()
+            uploaded()
         })
         .catch(error => {
-            return console.log(error)
         });
    
 }
 
+// Copy Link of ownGif
+function copyLink(){
+    const el = document.createElement('textarea');
+    el.value = myGifURL;
+    el.setAttribute('readonly', '');
+    el.style.position = 'absolute';
+    el.style.left = '-9999px';
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand('copy');
+    document.body.removeChild(el);
+    alert('Se copio el gif: '+myGifURL);
+
+}
+
+//Uploaded screen
+function uploaded(){
+    document.getElementById('title').innerHTML="Gif Subido Con Éxito"
+    document.getElementById("uploaded").style.display="inline-block";
+    document.getElementById("uploadInfo").style.display="none";
+    document.getElementById("buttons").style.display="none";
+    let camera = document.getElementById("camera");
+    camera.style.width="820px";
+    camera.style.height="310px";
+}
+
+//Uploaded screen
+function ok(){
+    document.getElementById('title').innerHTML="Un Chequeo antes de Comenzar";
+    document.getElementById("video").style.display="block";
+    document.getElementById("uploaded").style.display="none";
+    document.getElementById("uploadInfo").style.display="none";
+    document.getElementById("buttons").style.display="flex";
+    document.getElementById("cam").style.background=color;
+    document.getElementById("capture").style.background=color;
+    let camera = document.getElementById("camera");
+    camera.style.width="920px";
+    camera.style.height="548px";
+}
+
+
+// stop interval bar
+function stopBarInterval(barInterval){
+    clearInterval(barInterval);
+}
 // Upload Bar
 function progressBar() {
+    document.getElementById("title").innerHTML = "Subiendo Guifo";
+    document.getElementById("video").style.display="none";
+    document.getElementById("uploadInfo").style.display="inline-block";
+    let bar = document.getElementById('uploadBar');
+    let index = 1
+    let barInterval = setInterval(()=>{
+        const section = document.createElement('div');
+        section.setAttribute('class','section');
+        bar.appendChild(section);
+        index++;
+        if(index>27){
+            stopBarInterval(barInterval)
+        }
+    },200)        
     
-    let progressBar = document.getElementById('uploadBar');
-    progressBar.style.display = 'inline-block';
-    let counter = 0;
-    setInterval(function() {
-      progressBar.querySelectorAll('li')[liCounter].style.display = 'inline-block';
-      if (liCounter >= 15) {
-        progressBar.querySelectorAll('li').forEach(element => {
-          element.style.display = 'none';
-        })
-        liCounter = 0;
-      }else{
-        liCounter++;
-      }
-    }, 400);
-  };
+  }
 
 //record gif from camera
 function record(){  
+    document.getElementById("title").innerHTML = "Capturando Tu Guifo";
+    
+    color=document.getElementById("cam").style.background;
+    let camara= document.getElementById("cameraIcon").src;
     if (document.getElementById("capture").innerHTML != "Listo"){
+        document.getElementById("capture").style.background="#FF6161";
+        document.getElementById("cam").style.background="#FF6161";
         document.getElementById("cameraIcon").src="../assets/recording.svg"
         document.getElementById("capture").innerHTML="Listo"
-        document.getElementById("cam").setAttribute("onclick","stopInterval()");
-        document.getElementById("capture").setAttribute("onclick","stopInterval()");
+        document.getElementById("cam").setAttribute("onclick","stopInterval('"+camara+"')");
+        document.getElementById("cam").setAttribute("onclick","stopInterval('"+camara+"')");
+        document.getElementById("capture").setAttribute("onclick","stopInterval('"+camara+"')");
         document.getElementById("timer").style.display = "flex";
         interval = setInterval(setTime, 1000 );
-        
-
+    
         recorder.startRecording();
     }else{
-        document.getElementById("cameraIcon").src="../assets/camera.svg"
+        document.getElementById("title").innerHTML = "Un Chequeo antes de Comenzar";
+        document.getElementById("capture").style.background=color;
+        document.getElementById("cam").style.background=color;
+        document.getElementById("cameraIcon").src=camara;
         document.getElementById("capture").innerHTML="Capturar"
         document.getElementById("cam").setAttribute("onclick","record()");
+        document.getElementById("cam").style.background=color;
+        document.getElementById("capture").style.background=color;
         document.getElementById("capture").setAttribute("onclick","record()");
         document.getElementById("timer").style.display = "none";
         clearInterval(interval);
@@ -450,4 +546,12 @@ function themeNight(){
        setTheme('theme-day');
    }
 })();
-
+//Enter Key eventListener on Input (search)
+try{
+document.getElementById('search')
+  .addEventListener('keyup', function(event) {
+    if (event.code === 'Enter') {
+	  search()
+    }
+  });
+}catch(e){};

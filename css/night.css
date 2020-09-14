@@ -9,6 +9,9 @@
 .theme-night body {
   background-color: darkblue;
 }
+.theme-night body .logoContent .logo, .theme-night body .logoContent2 .logo {
+  content: url("../assets/gifOF_logo_dark.png");
+}
 .theme-night .bar {
   background-image: linear-gradient(to right, #2E32FB, #EE3EFE);
   color: white;
@@ -23,6 +26,11 @@
   background: #CE36DB;
   border: 1px solid #110038;
   box-shadow: inset -1px -1px 0 0 #A72CB3, inset 1px 1px 0 0 #FFFFFF;
+}
+.theme-night .subtitle {
+  background: #FFFAFE;
+  border: 1px solid #2E32FB;
+  box-shadow: inset -2px -2px 0 0 #E6DCE4, inset 2px 2px 0 0 #110038;
 }
 .theme-night .search {
   background: #FFFFFF;
@@ -77,4 +85,25 @@
 .theme-night .content .box, .theme-night .content .largeBox {
   background: #B4B4B4;
   box-shadow: inset -2px -2px 0 0 #8F8F8F, inset 2px 2px 0 0 #FFFFFF;
+}
+.theme-night .repButton {
+  color: white;
+  background: #110038;
+  border: 1px solid #B4B4B4;
+  box-shadow: inset -1px -1px 0 0 #5C5C5C, inset 1px 1px 0 0 #FFF4FD;
+}
+.theme-night .repButton:hover {
+  background: #110038;
+  border: 1px solid #B4B4B4;
+  box-shadow: inset -1px -1px 0 0 #5C5C5C, inset 1px 1px 0 0 #FFF4FD;
+}
+.theme-night #cameraIcon {
+  content: url("../assets/camera_light.svg");
+  background-repeat: no-repeat;
+}
+.theme-night .section {
+  background: #EE3EFE;
+}
+.theme-night .largeButton a:link, .theme-night .largeButton a:visited, .theme-night .largeButton a:active {
+  color: black;
 }

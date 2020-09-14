@@ -1,6 +1,9 @@
 .theme-day body {
   background-color: #fff4fd;
 }
+.theme-day body .logoContent .logo, .theme-day body .logoContent2 .logo {
+  content: url("../assets/gifOF_logo.png");
+}
 .theme-day .bar {
   background: linear-gradient(to right, #4180F6, #F7C9F3);
   color: white;
@@ -31,6 +34,11 @@
 }
 .theme-day .buscarContent {
   background-color: #E6E6E6;
+}
+.theme-day .subtitle {
+  background: #FFFAFE;
+  border: 1px solid #E6BBE2;
+  box-shadow: inset -2px -2px 0 0 #E6DCE4, inset 2px 2px 0 0 #80687D;
 }
 .theme-day .tags {
   background: #E6E6E6;
@@ -74,4 +82,22 @@
 .theme-day .content .box, .theme-day .content .largeBox {
   background: #E6E6E6;
   box-shadow: inset -2px -2px 0 0 #B4B4B4, inset 2px 2px 0 0 #FFFFFF;
+}
+.theme-day .repButton {
+  color: black;
+  background: #FFF4FD;
+  border: 1px solid #110038;
+  box-shadow: inset -1px -1px 0 0 #997D97, inset 1px 1px 0 0 #FFFFFF;
+}
+.theme-day .repButton:hover {
+  background: #F0E5EE;
+  border: 1px dotted #110038;
+  box-shadow: inset -1px -1px 0 0 #997D97, inset 1px 1px 0 0 #FFFFFF;
+}
+.theme-day #cameraIcon {
+  content: url("../assets/camera.svg");
+  background-repeat: no-repeat;
+}
+.theme-day .section {
+  background: #F7C9F3;
 }
